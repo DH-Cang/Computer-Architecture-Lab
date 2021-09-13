@@ -34,6 +34,7 @@ module CtrlUnit(
     wire funct3_6 = funct3 == 3'h6;
     wire funct3_7 = funct3 == 3'h7;
 
+    // decode according to each field
     wire ADD  = Rop & funct3_0 & funct7_0;
     wire SUB  = Rop & funct3_0 & funct7_32;
     wire SLL  = Rop & funct3_1 & funct7_0;
@@ -55,28 +56,28 @@ module CtrlUnit(
     wire SRLI  = Iop & funct3_5 & funct7_0;
     wire SRAI  = Iop & funct3_5 & funct7_32;
 
-    wire BEQ = ;                            //to fill sth. in 
-    wire BNE = ;                            //to fill sth. in 
-    wire BLT = ;                            //to fill sth. in 
-    wire BGE = ;                            //to fill sth. in 
-    wire BLTU = ;                           //to fill sth. in 
-    wire BGEU = ;                           //to fill sth. in 
+    wire BEQ = Bop & funct3_0;                            //to fill sth. in 
+    wire BNE = Bop & funct3_1;                            //to fill sth. in 
+    wire BLT = Bop & funct3_4;                            //to fill sth. in 
+    wire BGE = Bop & funct3_5;                            //to fill sth. in 
+    wire BLTU = Bop & funct3_6;                           //to fill sth. in 
+    wire BGEU = Bop & funct3_7;                           //to fill sth. in 
 
-    wire LB =  ;                            //to fill sth. in 
-    wire LH =  ;                            //to fill sth. in 
-    wire LW =  ;                            //to fill sth. in 
-    wire LBU = ;                            //to fill sth. in 
-    wire LHU = ;                            //to fill sth. in 
+    wire LB = Lop & funct3_0 ;                            //to fill sth. in 
+    wire LH = Lop & funct3_1 ;                            //to fill sth. in 
+    wire LW = Lop & funct3_2 ;                            //to fill sth. in 
+    wire LBU = Lop & funct3_4;                            //to fill sth. in 
+    wire LHU = Lop & funct3_5;                            //to fill sth. in 
 
-    wire SB = ;                             //to fill sth. in 
-    wire SH = ;                             //to fill sth. in 
-    wire SW = ;                             //to fill sth. in 
+    wire SB = Sop & funct3_0;                             //to fill sth. in 
+    wire SH = Sop & funct3_1;                             //to fill sth. in 
+    wire SW = Sop & funct3_2;                             //to fill sth. in 
 
-    wire LUI   = ;                          //to fill sth. in 
-    wire AUIPC = ;                          //to fill sth. in 
+    wire LUI   = opcode == 7'b0110111;                          //to fill sth. in 
+    wire AUIPC = opcode == 7'b0010111;                          //to fill sth. in 
 
-    wire JAL  = ;                           //to fill sth. in 
-    assign JALR = ;                        //to fill sth. in 
+    wire JAL  = opcode == 7'b1101111;                           //to fill sth. in 
+    assign JALR = (opcode == 7'b1100111) & funct3_0;                        //to fill sth. in 
 
     wire R_valid = AND | OR | ADD | XOR | SLL | SRL | SRA | SUB | SLT | SLTU;
     wire I_valid = ANDI | ORI | ADDI | XORI | SLLI | SRLI | SRAI | SLTI | SLTIU;
@@ -85,7 +86,7 @@ module CtrlUnit(
     wire S_valid = SW | SH | SB;
 
 
-    assign Branch = ;                       //to fill sth. in 
+    assign Branch = B_valid;                       // ????? not so sure
 
     parameter Imm_type_I = 3'b001;
     parameter Imm_type_B = 3'b010;
