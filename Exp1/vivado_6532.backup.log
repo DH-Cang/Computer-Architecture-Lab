@@ -2,10 +2,10 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Tue Sep 14 11:03:57 2021
-# Process ID: 14080
+# Start of session at: Mon Sep 13 22:15:33 2021
+# Process ID: 6532
 # Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/体系/lab/Computer-Architecture-Lab/Exp1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent924 d:\Users\lenovo\Desktop\debugzju\nightmare\体系\lab\Computer-Architecture-Lab\Exp1\Exp1.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17352 d:\Users\lenovo\Desktop\debugzju\nightmare\体系\lab\Computer-Architecture-Lab\Exp1\Exp1.xpr
 # Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/体系/lab/Computer-Architecture-Lab/Exp1/vivado.log
 # Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/体系/lab/Computer-Architecture-Lab/Exp1\vivado.jou
 #-----------------------------------------------------------
@@ -19,7 +19,7 @@ Finished scanning sources
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2020.1/data/ip'.
-open_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 1023.715 ; gain = 0.000
+open_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 1034.980 ; gain = 0.000
 update_compile_order -fileset sources_1
 exit
-INFO: [Common 17-206] Exiting Vivado at Tue Sep 14 12:08:58 2021...
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 13 23:01:13 2021...

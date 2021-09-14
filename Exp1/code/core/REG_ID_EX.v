@@ -21,39 +21,39 @@
 
 module    REG_ID_EX(input clk,                                         //ID/EX Latch
                     input rst,
-                    input EN,                                          //æµæ°´å¯„å­˜å™¨ä½¿ï¿½?
-                    input flush,                                       //æ•°æ®ç«äº‰æ¸…é™¤å¹¶ç­‰å¾…ï¼šDStall
-                    input [31:0] IR_ID,                                //å½“å‰è¯‘ç æŒ‡ä»¤(æµ‹è¯•)
-                    input [31:0] PCurrent_ID,                          //å½“å‰è¯‘ç æŒ‡ä»¤å­˜å‚¨å™¨æŒ‡ï¿½?
-                    input [4:0] rs1_addr,                               //å½“å‰æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Aåœ°å€
-                    input [4:0] rs2_addr,                               //å½“å‰æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Båœ°å€
-                    input [31:0] rs1_data,                             //å½“å‰æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Aæ•°æ®
-                    input [31:0] rs2_data,                             //å½“å‰æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Aæ•°æ®
-                    input [31:0] Imm32,                                //å½“å‰æŒ‡ä»¤è¯»å‡ºå¹¶æ‰©ï¿½?32ä½ç«‹å³æ•°ï¿½?
-                    input [4:0]  rd_addr,                              //å½“å‰æŒ‡ä»¤è¯»å‡ºç›®çš„æ“ä½œæ•°åœ°ï¿½?
-                    input ALUSrc_A,                             //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šALU Aé€šé“æ§åˆ¶
-                    input ALUSrc_B,                             //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šALU Bé€šé“æ§åˆ¶
-                    input [3:0]  ALUC,                                 //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šALUæ“ä½œæ§åˆ¶
-                    input DatatoReg,                            //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šREGå†™æ•°æ®ï¿½?ï¿½é“é€‰æ‹©
-                    input RegWrite,                                    //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šå¯„å­˜å™¨å†™ä¿¡ï¿½?
-                    input WR,                                          //å½“å‰æŒ‡ä»¤è¯‘ç ï¼šå­˜å‚¨å™¨è¯»å†™ä¿¡å·
+                    input EN,                                          //Á÷Ë®¼Ä´æÆ÷Ê¹??
+                    input flush,                                       //Êı¾İ¾ºÕùÇå³ı²¢µÈ´ı£ºDStall
+                    input [31:0] IR_ID,                                //µ±Ç°ÒëÂëÖ¸Áî(²âÊÔ)
+                    input [31:0] PCurrent_ID,                          //µ±Ç°ÒëÂëÖ¸Áî´æ´¢Æ÷Ö¸??
+                    input [4:0] rs1_addr,                               //µ±Ç°Ö¸Áî¶Á³ö¼Ä´æÆ÷AµØÖ·
+                    input [4:0] rs2_addr,                               //µ±Ç°Ö¸Áî¶Á³ö¼Ä´æÆ÷BµØÖ·
+                    input [31:0] rs1_data,                             //µ±Ç°Ö¸Áî¶Á³ö¼Ä´æÆ÷AÊı¾İ
+                    input [31:0] rs2_data,                             //µ±Ç°Ö¸Áî¶Á³ö¼Ä´æÆ÷AÊı¾İ
+                    input [31:0] Imm32,                                //µ±Ç°Ö¸Áî¶Á³ö²¢À©??32Î»Á¢¼´Êı??
+                    input [4:0]  rd_addr,                              //µ±Ç°Ö¸Áî¶Á³öÄ¿µÄ²Ù×÷ÊıµØ??
+                    input ALUSrc_A,                             //µ±Ç°Ö¸ÁîÒëÂë£ºALU AÍ¨µÀ¿ØÖÆ
+                    input ALUSrc_B,                             //µ±Ç°Ö¸ÁîÒëÂë£ºALU BÍ¨µÀ¿ØÖÆ
+                    input [3:0]  ALUC,                                 //µ±Ç°Ö¸ÁîÒëÂë£ºALU²Ù×÷¿ØÖÆ
+                    input DatatoReg,                            //µ±Ç°Ö¸ÁîÒëÂë£ºREGĞ´Êı¾İ???µÀÑ¡Ôñ
+                    input RegWrite,                                    //µ±Ç°Ö¸ÁîÒëÂë£º¼Ä´æÆ÷Ğ´ĞÅ??
+                    input WR,                                          //µ±Ç°Ö¸ÁîÒëÂë£º´æ´¢Æ÷¶ÁĞ´ĞÅºÅ
                     input [2:0] u_b_h_w,
                     input MIO,
 
-                    output reg[31:0] PCurrent_EX,                      //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤åœ°å€
-                    output reg[31:0] IR_EX,                            //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤(æµ‹è¯•)
+                    output reg[31:0] PCurrent_EX,                      //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîµØÖ·
+                    output reg[31:0] IR_EX,                            //Ëø´æµ±Ç°ÒëÂëÖ¸Áî(²âÊÔ)
                     output reg[4:0]  rs1_EX,
                     output reg[4:0]  rs2_EX,
-                    output reg[31:0] A_EX,                             //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Aæ•°æ®
-                    output reg[31:0] B_EX,                             //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤è¯»å‡ºå¯„å­˜å™¨Bæ•°æ®
-                    output reg[31:0] Imm32_EX,                          //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤32ä½ç«‹å³æ•°ï¿½?
-                    output reg[4:0]  rd_EX,                            //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤å†™ç›®çš„å¯„å­˜å™¨åœ°å€
-                    output reg       ALUSrc_A_EX,                      //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤ALU Aé€šé“æ§åˆ¶
-                    output reg       ALUSrc_B_EX,                      //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤ALU Bé€šé“æ§åˆ¶(ä¿ç•™)
-                    output reg[3:0]  ALUC_EX,                          //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤ALUæ“ä½œåŠŸèƒ½æ§åˆ¶
-                    output reg       DatatoReg_EX,                     //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤REGå†™æ•°æ®ï¿½?ï¿½é“é€‰æ‹©
-                    output reg       RegWrite_EX,                      //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤å¯„å­˜å™¨å†™ä¿¡å·
-                    output reg       WR_EX,                            //é”å­˜å½“å‰è¯‘ç æŒ‡ä»¤å­˜å‚¨å™¨è¯»å†™ä¿¡ï¿½?
+                    output reg[31:0] A_EX,                             //Ëø´æµ±Ç°ÒëÂëÖ¸Áî¶Á³ö¼Ä´æÆ÷AÊı¾İ
+                    output reg[31:0] B_EX,                             //Ëø´æµ±Ç°ÒëÂëÖ¸Áî¶Á³ö¼Ä´æÆ÷BÊı¾İ
+                    output reg[31:0] Imm32_EX,                          //Ëø´æµ±Ç°ÒëÂëÖ¸Áî32Î»Á¢¼´Êı??
+                    output reg[4:0]  rd_EX,                            //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîĞ´Ä¿µÄ¼Ä´æÆ÷µØÖ·
+                    output reg       ALUSrc_A_EX,                      //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîALU AÍ¨µÀ¿ØÖÆ
+                    output reg       ALUSrc_B_EX,                      //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîALU BÍ¨µÀ¿ØÖÆ(±£Áô)
+                    output reg[3:0]  ALUC_EX,                          //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîALU²Ù×÷¹¦ÄÜ¿ØÖÆ
+                    output reg       DatatoReg_EX,                     //Ëø´æµ±Ç°ÒëÂëÖ¸ÁîREGĞ´Êı¾İ???µÀÑ¡Ôñ
+                    output reg       RegWrite_EX,                      //Ëø´æµ±Ç°ÒëÂëÖ¸Áî¼Ä´æÆ÷Ğ´ĞÅºÅ
+                    output reg       WR_EX,                            //Ëø´æµ±Ç°ÒëÂëÖ¸Áî´æ´¢Æ÷¶ÁĞ´ĞÅ??
                     output reg[2:0]  u_b_h_w_EX,
                     output reg       MIO_EX
                 );
@@ -70,29 +70,29 @@ module    REG_ID_EX(input clk,                                         //ID/EX L
         MIO_EX       <= 0;
     end
     else if(EN)begin
-            if(flush)begin                               //æ•°æ®å†²çªæ—¶å†²åˆ·æµæ°´çº¿ç¦æ­¢æ”¹å˜CPUçŠ¶ï¿½??
-                IR_EX       <= 32'h00000000;             //nop,åºŸå¼ƒå½“å‰å–è„‚ : æ’å…¥32'h00000013
+            if(flush)begin                               //Êı¾İ³åÍ»Ê±³åË¢Á÷Ë®Ïß½ûÖ¹¸Ä±äCPU×´???
+                IR_EX       <= 32'h00000000;             //nop,·ÏÆúµ±Ç°È¡Ö¬ : ²åÈë32'h00000013
                 rd_EX       <= 0;                        //cancel Instruction write address
-                RegWrite_EX <= 0;                        //å¯„å­˜å™¨å†™ä¿¡å·ï¼šç¦æ­¢å¯„å­˜å™¨ï¿½?
+                RegWrite_EX <= 0;                        //¼Ä´æÆ÷Ğ´ĞÅºÅ£º½ûÖ¹¼Ä´æÆ÷??
                 WR_EX       <= 0;                        //cancel write memory
-                PCurrent_EX <= PCurrent_ID;              //ä¼ ï¿½?ï¿½PC(æµ‹è¯•)
+                PCurrent_EX <= PCurrent_ID;              //´«???PC(²âÊÔ)
                 MIO_EX       <= 0;
             end
-            else begin                                   //æ— æ•°æ®å†²çªæ­£å¸¸ä¼ è¾“åˆ°EXï¿½?
-                PCurrent_EX <= PCurrent_ID;              //ä¼ ï¿½?ï¿½å½“å‰æŒ‡ä»¤åœ°ï¿½?
-                IR_EX       <= IR_ID;                    //ä¼ ï¿½?ï¿½å½“å‰æŒ‡ä»¤åœ°ï¿½?(æµ‹è¯•)
-                A_EX        <= rs1_data;                 //ä¼ ï¿½?ï¿½å¯„å­˜å™¨Aè¯»å‡ºæ•°æ®
-                B_EX        <= rs2_data;                 //ä¼ ï¿½?ï¿½å¯„å­˜å™¨Bè¯»å‡ºæ•°æ®
-                Imm32_EX    <= Imm32;                    //ä¼ ï¿½?ï¿½æ‰©å±•åç«‹å³ï¿½?
-                rd_EX       <= rd_addr;                  //ä¼ ï¿½?ï¿½å†™ç›®çš„å¯„å­˜å™¨åœ°ï¿½?
+            else begin                                   //ÎŞÊı¾İ³åÍ»Õı³£´«Êäµ½EX??
+                PCurrent_EX <= PCurrent_ID;              //´«???µ±Ç°Ö¸ÁîµØ??
+                IR_EX       <= IR_ID;                    //´«???µ±Ç°Ö¸ÁîµØ??(²âÊÔ)
+                A_EX        <= rs1_data;                 //´«???¼Ä´æÆ÷A¶Á³öÊı¾İ
+                B_EX        <= rs2_data;                 //´«???¼Ä´æÆ÷B¶Á³öÊı¾İ
+                Imm32_EX    <= Imm32;                    //´«???À©Õ¹ºóÁ¢¼´??
+                rd_EX       <= rd_addr;                  //´«???Ğ´Ä¿µÄ¼Ä´æÆ÷µØ??
                 rs1_EX      <= rs1_addr;
                 rs2_EX      <= rs2_addr;
-                ALUSrc_A_EX <= ALUSrc_A;                 //ä¼ ï¿½?ï¿½ALU Aé€šé“æ§åˆ¶ä¿¡å·
-                ALUSrc_B_EX <= ALUSrc_B;                 //ä¼ ï¿½?ï¿½ALU Bé€šé“æ§åˆ¶ä¿¡å·
-                ALUC_EX     <= ALUC;                     //ä¼ ï¿½?ï¿½ALUæ“ä½œåŠŸèƒ½æ§åˆ¶ä¿¡å·
-                DatatoReg_EX<= DatatoReg;               //ä¼ ï¿½?ï¿½REGå†™æ•°æ®ï¿½?ï¿½é“é€‰æ‹©
-                RegWrite_EX <= RegWrite;                 //ä¼ ï¿½?ï¿½å¯„å­˜å™¨å†™ä¿¡ï¿½?
-                WR_EX       <= WR;                       //ä¼ ï¿½?ï¿½å­˜å‚¨å™¨è¯»å†™ä¿¡å·
+                ALUSrc_A_EX <= ALUSrc_A;                 //´«???ALU AÍ¨µÀ¿ØÖÆĞÅºÅ
+                ALUSrc_B_EX <= ALUSrc_B;                 //´«???ALU BÍ¨µÀ¿ØÖÆĞÅºÅ
+                ALUC_EX     <= ALUC;                     //´«???ALU²Ù×÷¹¦ÄÜ¿ØÖÆĞÅºÅ
+                DatatoReg_EX<= DatatoReg;               //´«???REGĞ´Êı¾İ???µÀÑ¡Ôñ
+                RegWrite_EX <= RegWrite;                 //´«???¼Ä´æÆ÷Ğ´ĞÅ??
+                WR_EX       <= WR;                       //´«???´æ´¢Æ÷¶ÁĞ´ĞÅºÅ
                 u_b_h_w_EX    <= u_b_h_w;
                 MIO_EX       <= MIO;
 

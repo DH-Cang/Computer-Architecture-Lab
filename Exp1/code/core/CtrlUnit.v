@@ -86,7 +86,7 @@ module CtrlUnit(
     wire S_valid = SW | SH | SB;
 
 
-    assign Branch = B_valid;                       // ????? not so sure
+    assign Branch = B_valid | JAL | JALR;                       // ????? not so sure
 
     parameter Imm_type_I = 3'b001;
     parameter Imm_type_B = 3'b010;
@@ -99,12 +99,16 @@ module CtrlUnit(
                     {3{S_valid}}                  & Imm_type_S |
                     {3{LUI | AUIPC}}              & Imm_type_U ;
 
-
+    // relate to hazard?
     assign cmp_ctrl = ;                         //to fill sth. in 
 
-    assign ALUSrc_A = ;                         //to fill sth. in 
+    // 1 for register, 0 for PC
+    // not so sure
+    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR ;                         //to fill sth. in 
 
-    assign ALUSrc_B = ;                         //to fill sth. in 
+    // 0 for register, 1 for immediate
+    // not so sure
+    assign ALUSrc_B = !(R_valid | B_valid | S_valid);                         //to fill sth. in 
 
     parameter ALU_ADD  = 4'b0001;
     parameter ALU_SUB  = 4'b0010;
@@ -139,10 +143,11 @@ module CtrlUnit(
 
     assign MIO = L_valid | S_valid;
 
-    assign rs1use =  ;                        //to fill sth. in 
+    assign rs1use = R_valid | I_valid | B_valid | L_valid | S_valid | JALR ;                        //to fill sth. in 
 
-    assign rs2use = ;                         //to fill sth. in 
+    assign rs2use = R_valid | B_valid | S_valid ;                         //to fill sth. in 
 
+    // custom? 
     assign hazard_optype = ;                  //to fill sth. in 
 
 endmodule
