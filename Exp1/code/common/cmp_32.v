@@ -1,16 +1,18 @@
 `timescale 1ns / 1ps
 
+// ctrl: determine which mode to compare a and b
+// c: asserted if the condition is fulfilled
 module cmp_32(  input [31:0] a,
                 input [31:0] b,
                 input [2:0] ctrl,
                 output c
     );
-    parameter cmp_EQ  = 3'b001;
-    parameter cmp_NE  = 3'b010;
-    parameter cmp_LT  = 3'b011;
-    parameter cmp_LTU = 3'b100;
-    parameter cmp_GE  = 3'b101;
-    parameter cmp_GEU = 3'b110;
+    parameter cmp_EQ  = 3'b001; // a == b
+    parameter cmp_NE  = 3'b010; // a != b
+    parameter cmp_LT  = 3'b011; // a < b 
+    parameter cmp_LTU = 3'b100; // a < b (unsigned)
+    parameter cmp_GE  = 3'b101; // a >= b
+    parameter cmp_GEU = 3'b110; // a >= b (unsigned)
 
     wire res_EQ  = a == b;
     wire res_NE  = ~res_EQ;

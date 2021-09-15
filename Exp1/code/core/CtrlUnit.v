@@ -56,12 +56,12 @@ module CtrlUnit(
     wire SRLI  = Iop & funct3_5 & funct7_0;
     wire SRAI  = Iop & funct3_5 & funct7_32;
 
-    wire BEQ = Bop & funct3_0;                            //to fill sth. in 
-    wire BNE = Bop & funct3_1;                            //to fill sth. in 
-    wire BLT = Bop & funct3_4;                            //to fill sth. in 
-    wire BGE = Bop & funct3_5;                            //to fill sth. in 
-    wire BLTU = Bop & funct3_6;                           //to fill sth. in 
-    wire BGEU = Bop & funct3_7;                           //to fill sth. in 
+    wire BEQ = Bop & funct3_0 & cmp_res;                            //to fill sth. in 
+    wire BNE = Bop & funct3_1 & cmp_res;                            //to fill sth. in 
+    wire BLT = Bop & funct3_4 & cmp_res;                            //to fill sth. in 
+    wire BGE = Bop & funct3_5 & cmp_res;                            //to fill sth. in 
+    wire BLTU = Bop & funct3_6 & cmp_res;                           //to fill sth. in 
+    wire BGEU = Bop & funct3_7 & cmp_res;                           //to fill sth. in 
 
     wire LB = Lop & funct3_0 ;                            //to fill sth. in 
     wire LH = Lop & funct3_1 ;                            //to fill sth. in 
@@ -86,7 +86,7 @@ module CtrlUnit(
     wire S_valid = SW | SH | SB;
 
 
-    assign Branch = B_valid | JAL | JALR;                       // ????? not so sure
+    assign Branch = B_valid | JAL | JALR;      // when PC changes from PC+4 to other values, Branch signal must be asserted
 
     parameter Imm_type_I = 3'b001;
     parameter Imm_type_B = 3'b010;
@@ -99,16 +99,21 @@ module CtrlUnit(
                     {3{S_valid}}                  & Imm_type_S |
                     {3{LUI | AUIPC}}              & Imm_type_U ;
 
-    // relate to hazard?
-    assign cmp_ctrl = ;                         //to fill sth. in 
+    //determine comparision mode
+    assign cmp_ctrl =   {3{BEQ}  & 3'b001} |
+                        {3{BNE}  & 3'b010} |
+                        {3{BLT}  & 3'b011} |
+                        {3{BGE}  & 3'b101} |
+                        {3{BLTU} & 3'b100} |
+                        {3{BGEU} & 3'b110} ;                         
 
     // 1 for register, 0 for PC
     // not so sure
-    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR ;                         //to fill sth. in 
+    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR | LUI;    //to fill sth. in 
 
     // 0 for register, 1 for immediate
     // not so sure
-    assign ALUSrc_B = !(R_valid | B_valid | S_valid);                         //to fill sth. in 
+    assign ALUSrc_B = !(R_valid | B_valid);                         //to fill sth. in 
 
     parameter ALU_ADD  = 4'b0001;
     parameter ALU_SUB  = 4'b0010;
