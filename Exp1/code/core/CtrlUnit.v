@@ -56,12 +56,12 @@ module CtrlUnit(
     wire SRLI  = Iop & funct3_5 & funct7_0;
     wire SRAI  = Iop & funct3_5 & funct7_32;
 
-    wire BEQ = Bop & funct3_0 & cmp_res;                            //to fill sth. in 
-    wire BNE = Bop & funct3_1 & cmp_res;                            //to fill sth. in 
-    wire BLT = Bop & funct3_4 & cmp_res;                            //to fill sth. in 
-    wire BGE = Bop & funct3_5 & cmp_res;                            //to fill sth. in 
-    wire BLTU = Bop & funct3_6 & cmp_res;                           //to fill sth. in 
-    wire BGEU = Bop & funct3_7 & cmp_res;                           //to fill sth. in 
+    wire BEQ = Bop & funct3_0 ;                            //to fill sth. in 
+    wire BNE = Bop & funct3_1 ;                            //to fill sth. in 
+    wire BLT = Bop & funct3_4 ;                            //to fill sth. in 
+    wire BGE = Bop & funct3_5 ;                            //to fill sth. in 
+    wire BLTU = Bop & funct3_6 ;                           //to fill sth. in 
+    wire BGEU = Bop & funct3_7 ;                           //to fill sth. in 
 
     wire LB = Lop & funct3_0 ;                            //to fill sth. in 
     wire LH = Lop & funct3_1 ;                            //to fill sth. in 
@@ -86,7 +86,7 @@ module CtrlUnit(
     wire S_valid = SW | SH | SB;
 
 
-    assign Branch = B_valid | JAL | JALR;      // when PC changes from PC+4 to other values, Branch signal must be asserted
+    assign Branch = (B_valid | JAL | JALR ) & cmp_res;      // when PC changes from PC+4 to other values, Branch signal must be asserted
 
     parameter Imm_type_I = 3'b001;
     parameter Imm_type_B = 3'b010;
@@ -108,11 +108,9 @@ module CtrlUnit(
                         {3{BGEU} & 3'b110} ;                         
 
     // 1 for register, 0 for PC
-    // not so sure
-    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR | LUI;    //to fill sth. in 
+    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR;    //to fill sth. in 
 
     // 0 for register, 1 for immediate
-    // not so sure
     assign ALUSrc_B = !(R_valid | B_valid);                         //to fill sth. in 
 
     parameter ALU_ADD  = 4'b0001;
@@ -148,8 +146,10 @@ module CtrlUnit(
 
     assign MIO = L_valid | S_valid;
 
+    // is rs1 used in this instruction
     assign rs1use = R_valid | I_valid | B_valid | L_valid | S_valid | JALR ;                        //to fill sth. in 
 
+    // is rs2 used in this instruction( hazard detect ? )
     assign rs2use = R_valid | B_valid | S_valid ;                         //to fill sth. in 
 
     // custom? 

@@ -80,11 +80,11 @@ module  RV32core(
     
     ImmGen imm_gen(.ImmSel(ImmSel_ctrl),.inst_field(inst_ID),.Imm_out(Imm_out_ID));
     
-    MUX4T1_32 mux_forward_A(.I0(),.I1(),.I2(),.I3(),        //to fill sth. in ()
-        .s(),.o());
+    MUX4T1_32 mux_forward_A(.I0(rs1_data_reg),.I1(ALUout_EXE),.I2(ALUout_MEM),.I3(Datain_MEM),        //to fill sth. in ()
+        .s(forward_ctrl_A),.o(rs1_data_ID));
     
-    MUX4T1_32 mux_forward_B(.I0(),.I1(),.I2(),.I3(),        //to fill sth. in ()
-        .s(),.o());
+    MUX4T1_32 mux_forward_B(.I0(rs2_data_reg),.I1(ALUout_EXE),.I2(ALUout_MEM),.I3(Datain_MEM),        //to fill sth. in ()
+        .s(forward_ctrl_B),.o(rs2_data_ID));
     
     MUX2T1_32 mux_branch_ID(.I0(PC_ID),.I1(rs1_data_ID),.s(JALR),.o(addA_ID));
 
@@ -125,7 +125,7 @@ module  RV32core(
         .res(ALUout_EXE),.zero(ALUzero_EXE),.overflow(ALUoverflow_EXE));
     
    // decide which one to write into the memory
-   MUX2T1_32 mux_forward_EXE(.I0(rs2_data_EXE),.I1(Datain_MEM),.s(),.o(Dataout_EXE));        //to fill sth. in ()
+   MUX2T1_32 mux_forward_EXE(.I0(rs2_data_EXE),.I1(Datain_MEM),.s(forward_ctrl_ls),.o(Dataout_EXE));        //to fill sth. in ()
 
 
     // MEM
