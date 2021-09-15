@@ -100,12 +100,12 @@ module CtrlUnit(
                     {3{LUI | AUIPC}}              & Imm_type_U ;
 
     //determine comparision mode
-    assign cmp_ctrl =   {3{BEQ}  & 3'b001} |
-                        {3{BNE}  & 3'b010} |
-                        {3{BLT}  & 3'b011} |
-                        {3{BGE}  & 3'b101} |
-                        {3{BLTU} & 3'b100} |
-                        {3{BGEU} & 3'b110} ;                         
+    assign cmp_ctrl =   {3{BEQ} } & 3'b001 |
+                        {3{BNE} } & 3'b010 |
+                        {3{BLT} } & 3'b011 |
+                        {3{BGE} } & 3'b101 |
+                        {3{BLTU}} & 3'b100 |
+                        {3{BGEU}} & 3'b110 ;                         
 
     // 1 for register, 0 for PC
     assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR;    //to fill sth. in 
@@ -138,9 +138,9 @@ module CtrlUnit(
                         {4{JAL | JALR}}                             & ALU_Ap4  |
                         {4{LUI}}                                    & ALU_Bout ;
 
-    assign DatatoReg = L_valid;
+    assign DatatoReg = L_valid; // memory to registers
 
-    assign RegWrite = R_valid | I_valid | JAL | JALR | L_valid | LUI | AUIPC;
+    assign RegWrite = R_valid | I_valid | JAL | JALR | L_valid | LUI | AUIPC; // all those write registers
 
     assign mem_w = S_valid;
 
@@ -152,7 +152,12 @@ module CtrlUnit(
     // is rs2 used in this instruction( hazard detect ? )
     assign rs2use = R_valid | B_valid | S_valid ;                         //to fill sth. in 
 
-    // custom? 
-    assign hazard_optype = ;                  //to fill sth. in 
+    // 00: no hazard
+    // 01: data hazard(R, I, U)
+    // 10: load-store
+    // not sure
+    assign hazard_optype = {2{rs1use}} & 2'b01 |
+                           {2{rs2use}} & 2'b01 |
+                           {2{S_valid}} & 2'b10;                  //to fill sth. in 
 
 endmodule

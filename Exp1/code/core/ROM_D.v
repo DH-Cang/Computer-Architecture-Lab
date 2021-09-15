@@ -7,8 +7,9 @@ module ROM_D(
 
     reg[31:0] inst_data[0:127];
 
+
     initial	begin
-        $readmemh("rom2.hex", inst_data);
+        $readmemh("D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/rom.hex", inst_data); 
     end
 
     assign spo = inst_data[a];

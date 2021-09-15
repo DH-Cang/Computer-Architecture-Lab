@@ -15,7 +15,8 @@ module core_sim;
 
     initial begin
         clk = 0;
-        rst = 1;
+        rst = 0;
+        #2 rst = 1;
         #2 rst = 0;
     end
     always #1 clk = ~clk;

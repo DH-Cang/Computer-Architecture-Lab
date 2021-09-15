@@ -10,9 +10,12 @@ module RAM_B(
 );
 
     reg[7:0] data[0:127];
+    reg[4:0] n;         // temp
 
     initial	begin
-        $readmemh("ram.hex", data);
+        $readmemh("D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/ram.hex", data);
+        for(n=0; n<=3; n=n+1)
+        $display("%b", data[n]);
     end
 
     always @ (negedge clka) begin
