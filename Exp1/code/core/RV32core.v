@@ -56,7 +56,7 @@ module  RV32core(
     add_32 add_IF(.a(PC_IF),.b(32'd4),.c(PC_4_IF));
 
     // 1 for jump
-    MUX2T1_32 mux_IF(.I0(PC_4_IF),.I1(jump_PC_ID),.s(Branch_ctrl),.o(PC_IF));        //to fill sth. in ()
+    MUX2T1_32 mux_IF(.I0(PC_4_IF),.I1(jump_PC_ID),.s(Branch_ctrl),.o(next_PC_IF));        //to fill sth. in ()
 
     ROM_D inst_rom(.a(PC_IF[8:2]),.spo(inst_IF));
 

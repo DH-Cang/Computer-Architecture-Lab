@@ -38,13 +38,8 @@ module HazardDetectionUnit(
     always@ * begin
         // data hazard
         // forward A
-        if(rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0) begin
-            if (DatatoReg_EX)begin
-                // 1 stall
-            end
-            else begin
-                forward_ctrl_A <= 2'b01; 
-            end
+        if(rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0 && DatatoReg_EX==0) begin
+            forward_ctrl_A <= 2'b01; 
         end 
         else if(rd_MEM == rs1_ID && rs1use_ID && rs1_ID!=0 && DatatoReg_MEM==0) begin
             forward_ctrl_A <= 2'b10; 
@@ -56,13 +51,8 @@ module HazardDetectionUnit(
             forward_ctrl_A <= 2'b00; 
         end
         // forward B
-        if(rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0) begin
-            if (DatatoReg_EX)begin
-                // 1 stall
-            end
-            else begin
-                forward_ctrl_A <= 2'b01; 
-            end
+        if(rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0 && DatatoReg_EX==0) begin
+            forward_ctrl_B <= 2'b01; 
         end 
         else if(rd_MEM == rs2_ID && rs2use_ID && rs2_ID!=0 && DatatoReg_MEM==0) begin
             forward_ctrl_B <= 2'b10; 
@@ -82,7 +72,19 @@ module HazardDetectionUnit(
         end
 
         // control hazard
-        if(Branch_ID)begin
+        if( ((rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0) || (rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0)) && DatatoReg_EX) begin
+            // ld, add, (need stall)
+            PC_EN_IF <= 0; 
+            reg_FD_EN <= 1; 
+            reg_FD_stall <= 1; 
+            reg_FD_flush <= 0; 
+            reg_DE_EN <= 1; 
+            reg_DE_flush <= 1; 
+            reg_EM_EN <= 1; 
+            reg_EM_flush <= 0; 
+            reg_MW_EN <= 1; 
+        end
+        else if(Branch_ID)begin
             // update PC
             // flush reg_if_id
             PC_EN_IF <= 1; 

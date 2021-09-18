@@ -28,8 +28,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/2021WinterMaterial/Architecture/
 INFO: [VRFC 10-311] analyzing module ROM_D
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/RV32core.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module RV32core
-INFO: [VRFC 10-2458] undeclared symbol Addr, assumed default net type wire [D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/RV32core.v:186]
-INFO: [VRFC 10-2458] undeclared symbol MWR, assumed default net type wire [D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/RV32core.v:187]
+INFO: [VRFC 10-2458] undeclared symbol Addr, assumed default net type wire [D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/RV32core.v:187]
+INFO: [VRFC 10-2458] undeclared symbol MWR, assumed default net type wire [D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/RV32core.v:188]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/Regs.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Regs
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/common/add_32.v" into library xil_defaultlib

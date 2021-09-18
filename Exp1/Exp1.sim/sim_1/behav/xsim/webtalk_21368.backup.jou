@@ -2,13 +2,11 @@
 # Webtalk v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sat Sep 18 08:29:55 2021
-# Process ID: 13696
+# Start of session at: Wed Sep 15 19:54:10 2021
+# Process ID: 21368
 # Current directory: D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim
 # Command line: wbtcv.exe -mode batch -source D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
 source D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/xsim_webtalk.tcl -notrace
-webtalk_transmit: Time (s): cpu = 00:00:00 ; elapsed = 00:00:12 . Memory (MB): peak = 113.914 ; gain = 17.648
-INFO: [Common 17-206] Exiting Webtalk at Sat Sep 18 08:30:07 2021...
