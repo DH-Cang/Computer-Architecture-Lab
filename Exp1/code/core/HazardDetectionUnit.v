@@ -8,7 +8,7 @@ module HazardDetectionUnit(
     output reg PC_EN_IF, reg_FD_EN, reg_FD_stall, reg_FD_flush,
         reg_DE_EN, reg_DE_flush, reg_EM_EN, reg_EM_flush, reg_MW_EN,
     output reg forward_ctrl_ls,
-    output[1:0] reg forward_ctrl_A, forward_ctrl_B
+    output reg[1:0] forward_ctrl_A, forward_ctrl_B
 );
 
     // assign PC_EN_IF = 'b1;
@@ -85,6 +85,15 @@ module HazardDetectionUnit(
         if(Branch_ID)begin
             // update PC
             // flush reg_if_id
+            PC_EN_IF <= 1; 
+            reg_FD_EN <= 1; 
+            reg_FD_stall <= 0; 
+            reg_FD_flush <= 1; // key
+            reg_DE_EN <= 1; 
+            reg_DE_flush <= 0; 
+            reg_EM_EN <= 1; 
+            reg_EM_flush <= 0; 
+            reg_MW_EN <= 1; 
         end
         else begin
             // everything normal

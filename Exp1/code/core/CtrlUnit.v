@@ -86,7 +86,7 @@ module CtrlUnit(
     wire S_valid = SW | SH | SB;
 
 
-    assign Branch = (B_valid | JAL | JALR ) & cmp_res;      // when PC changes from PC+4 to other values, Branch signal must be asserted
+    assign Branch = (B_valid & cmp_res) | JAL | JALR  ;      // when PC changes from PC+4 to other values, Branch signal must be asserted
 
     parameter Imm_type_I = 3'b001;
     parameter Imm_type_B = 3'b010;
