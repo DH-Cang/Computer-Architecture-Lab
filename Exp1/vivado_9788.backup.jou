@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Tue Sep 21 15:35:44 2021
+# Process ID: 9788
+# Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2256 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp1\Exp1.xpr
+# Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1/vivado.log
+# Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1/Exp1.xpr
+update_compile_order -fileset sources_1

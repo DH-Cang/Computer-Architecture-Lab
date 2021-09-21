@@ -2,7 +2,7 @@
 
 module HazardDetectionUnit(
     input clk,
-    input Branch_ID, rs1use_ID, rs2use_ID, DatatoReg_MEM, DatatoReg_EX, RegWrite_EX,
+    input Branch_ID, rs1use_ID, rs2use_ID, DatatoReg_MEM, DatatoReg_EX, RegWrite_EX,WR_ID,
     input[1:0] hazard_optype_ID,    // idle
     input[4:0] rd_EXE, rd_MEM, rs1_ID, rs2_ID, rs2_EXE,
     output reg PC_EN_IF, reg_FD_EN, reg_FD_stall, reg_FD_flush,
@@ -74,7 +74,7 @@ module HazardDetectionUnit(
         end
 
         // control hazard
-        if( ((rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0) || (rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0)) && DatatoReg_EX) begin
+        if( ((rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0) || (rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0 && WR_ID==0)) && DatatoReg_EX) begin
             // ld, add, (need stall)
             PC_EN_IF <= 0; 
             reg_FD_EN <= 1; 

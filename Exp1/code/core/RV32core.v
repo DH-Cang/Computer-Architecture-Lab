@@ -93,7 +93,7 @@ module  RV32core(
     cmp_32 cmp_ID(.a(rs1_data_ID),.b(rs2_data_ID),.ctrl(cmp_ctrl),.c(cmp_res_ID));        
     
     HazardDetectionUnit hazard_unit(.clk(debug_clk),.Branch_ID(Branch_ctrl),.rs1use_ID(rs1use_ctrl),.DatatoReg_EX(DatatoReg_EXE),.RegWrite_EX(RegWrite_EXE),
-        .rs2use_ID(rs2use_ctrl),.DatatoReg_MEM(DatatoReg_MEM),.hazard_optype_ID(hazard_optype_ctrl),.rd_EXE(rd_EXE),
+        .rs2use_ID(rs2use_ctrl),.DatatoReg_MEM(DatatoReg_MEM),.hazard_optype_ID(hazard_optype_ctrl),.rd_EXE(rd_EXE),.WR_ID(mem_w_ctrl),
         .rd_MEM(rd_MEM),.rs1_ID(inst_ID[19:15]),.rs2_ID(inst_ID[24:20]),.rs2_EXE(rs2_EXE),
 
         .PC_EN_IF(PC_EN_IF),.reg_FD_EN(reg_FD_EN),.reg_FD_stall(reg_FD_stall),
