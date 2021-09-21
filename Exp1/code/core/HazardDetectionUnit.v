@@ -2,7 +2,7 @@
 
 module HazardDetectionUnit(
     input clk,
-    input Branch_ID, rs1use_ID, rs2use_ID, DatatoReg_MEM, DatatoReg_EX, 
+    input Branch_ID, rs1use_ID, rs2use_ID, DatatoReg_MEM, DatatoReg_EX, RegWrite_EX,
     input[1:0] hazard_optype_ID,    // idle
     input[4:0] rd_EXE, rd_MEM, rs1_ID, rs2_ID, rs2_EXE,
     output reg PC_EN_IF, reg_FD_EN, reg_FD_stall, reg_FD_flush,
@@ -38,6 +38,7 @@ module HazardDetectionUnit(
     always@ * begin
         // data hazard
         // forward A
+        //                                              // Regwrite_EX==1 is better?
         if(rd_EXE == rs1_ID && rs1use_ID && rs1_ID!=0 && DatatoReg_EX==0) begin
             forward_ctrl_A <= 2'b01; 
         end 
@@ -51,6 +52,7 @@ module HazardDetectionUnit(
             forward_ctrl_A <= 2'b00; 
         end
         // forward B
+        //                                              // Regwrite_EX==1 is better?
         if(rd_EXE == rs2_ID && rs2use_ID && rs2_ID!=0 && DatatoReg_EX==0) begin
             forward_ctrl_B <= 2'b01; 
         end 

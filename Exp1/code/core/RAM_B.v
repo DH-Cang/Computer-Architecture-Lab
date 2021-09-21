@@ -13,7 +13,7 @@ module RAM_B(
     reg[4:0] n;         // temp
 
     initial	begin
-        $readmemh("D:/2021WinterMaterial/Architecture/Computer-Architecture-Lab/Exp1/code/core/ram.hex", data);
+        $readmemh("ram.hex", data);
         for(n=0; n<=3; n=n+1)
         $display("%b", data[n]);
     end
