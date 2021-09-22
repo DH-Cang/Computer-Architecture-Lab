@@ -1,0 +1,16 @@
++--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
+|       Launch Clock       |      Capture Clock       |                                                 Pin                                                      |
++--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
+|                  clkout0 |                  clkout0 |                                                                                   vga/ascii_code_reg[5]/D|
+|                  clkout0 |                  clkout0 |                                                                               vga/ascii_code_reg[0]_inv/D|
+|                  clkout0 |                  clkout0 |                                                                                   vga/ascii_code_reg[1]/D|
+|                  clkout0 |                  clkout0 |                                                                                   vga/ascii_code_reg[3]/D|
+|                  clkout3 |                  clkout0 |                                                                      vga/data_buf_reg_0_3_24_29/RAMC_D1/I|
+|                  clkout3 |                  clkout0 |                                                                         vga/data_buf_reg_0_3_18_23/RAMA/I|
+|                  clkout3 |                  clkout0 |                                                                           vga/data_buf_reg_0_3_0_5/RAMA/I|
+|                  clkout3 |                  clkout0 |                                                                          vga/data_buf_reg_0_3_6_11/RAMB/I|
+|                  clkout3 |                  clkout0 |                                                                         vga/data_buf_reg_0_3_18_23/RAMC/I|
+|                  clkout3 |                  clkout0 |                                                                          vga/data_buf_reg_0_3_6_11/RAMA/I|
+|                  clkout3 |                  clkout0 |                                                                         vga/data_buf_reg_0_3_12_17/RAMB/I|
+|                  clkout3 |                  clkout0 |                                                                          vga/data_buf_reg_0_3_6_11/RAMC/I|
++--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
