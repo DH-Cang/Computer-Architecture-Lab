@@ -108,7 +108,7 @@ module CtrlUnit(
                         {3{BGEU}} & 3'b110 ;                         
 
     // 1 for register, 0 for PC
-    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid | JALR;    //to fill sth. in 
+    assign ALUSrc_A = R_valid | I_valid | B_valid | L_valid | S_valid ;    //to fill sth. in 
 
     // 0 for register, 1 for immediate
     assign ALUSrc_B = !(R_valid | B_valid);                         //to fill sth. in 

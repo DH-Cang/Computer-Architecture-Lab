@@ -40,3 +40,5 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/ni
 INFO: [VRFC 10-311] analyzing module debug_clk
 INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1/code/sim/core_sim.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module core_sim
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp1/Exp1.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

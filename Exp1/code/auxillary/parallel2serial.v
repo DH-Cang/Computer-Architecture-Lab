@@ -4,7 +4,7 @@
  * Parallel-Serial Converter.
  * Author: Zhao, Hongyu  <power_zhy@foxmail.com>
  */
-module parallel2serial (
+module parallel2serial(
     input wire clk,  // main clock
     input wire rst,  // synchronous reset
     input wire [DATA_BITS-1:0] data,  // parallel input data
