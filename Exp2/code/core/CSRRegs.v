@@ -18,25 +18,32 @@ module CSRRegs(
     wire waddr_valid = waddr[11:7] == 5'h6 && waddr[5:3] == 3'h0;
     wire[3:0] waddr_map = (waddr[6] << 3) + waddr[2:0];
 
+    // mstatus: 00110  0  000  000 
+    // mie:     00110  0  000  100
+    // mtvec:   00110  0  000  101
+    // mepc:    00110  1  000  001
+    // mcause:  00110  1  000  010
+    // mtval:   00110  1  000  011
+    // mip:     00110  1  000  100
     assign mstatus = CSR[0];
 
     assign rdata = CSR[raddr_map];
 
     always@(posedge clk or posedge rst) begin
         if(rst) begin
-			CSR[0] <= 32'h88;
+			CSR[0] <= 32'h88;       // mstatus
 			CSR[1] <= 0;
 			CSR[2] <= 0;
 			CSR[3] <= 0;
-			CSR[4] <= 32'hfff;
-			CSR[5] <= 0;
+			CSR[4] <= 32'hfff;      // mie
+			CSR[5] <= 0;            // mtvec
 			CSR[6] <= 0;
 			CSR[7] <= 0;
 			CSR[8] <= 0;
-			CSR[9] <= 0;
-			CSR[10] <= 0;
-			CSR[11] <= 0;
-			CSR[12] <= 0;
+			CSR[9] <= 0;            // mepc
+			CSR[10] <= 0;           // mcause
+			CSR[11] <= 0;           // mtval
+			CSR[12] <= 0;           // mip
 			CSR[13] <= 0;
 			CSR[14] <= 0;
 			CSR[15] <= 0;
