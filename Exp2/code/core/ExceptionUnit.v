@@ -2,8 +2,8 @@
 
 module ExceptionUnit(
     input clk, rst,
-    input csr_rw_in,
-    input[1:0] csr_wsc_mode_in, // 00:User 01:Supervisor 11:Machine
+    input csr_rw_in,            // whether a r/w intruction
+    input[1:0] csr_wsc_mode_in, // 01: rw  10: rs  11: rc
     input csr_w_imm_mux,        // csr instructions with immediate
     input[11:0] csr_rw_addr_in, // address of the csr
     input[31:0] csr_w_data_reg, // data to write into a csr
@@ -20,11 +20,11 @@ module ExceptionUnit(
 
     input[31:0] epc_cur,    // PC of WB
     input[31:0] epc_next,   // next PC that would not be flushed
-    output[31:0] reg PC_redirect,   // PC to fetch in IF
-    output reg redirect_mux,    // select PC for IF
+    output [31:0] PC_redirect,   // PC to fetch in IF
+    output redirect_mux,    // select PC for IF
 
     output reg reg_FD_flush, reg_DE_flush, reg_EM_flush, reg_MW_flush, 
-    output RegWrite_cancel
+    output reg RegWrite_cancel
 );
 
     reg[11:0] csr_raddr, csr_waddr;
@@ -47,20 +47,26 @@ module ExceptionUnit(
     // the data to write into a csr
     assign csr_w_data = csr_w_imm_mux ? csr_w_data_imm : csr_w_data_reg; 
     assign exception = illegal_inst | l_access_fault | s_access_fault; 
+    // PC
+    assign PC_redirect = (state == mepc || mret && ~rst) ? csr_r_data_out : 0; 
+    assign redirect_mux = (state == mepc || mret && ~rst) ? 1 : 0; 
     always @(posedge clk or posedge rst) begin
         if(rst)begin
             state <= idle; 
-            reg_FD_flush <= 0, reg_DE_flush <= 0, reg_EM_flush <= 0, reg_MW_flush <= 0;
+            reg_FD_flush <= 0;
+            reg_DE_flush <= 0;
+            reg_EM_flush <= 0;
+            reg_MW_flush <= 0;
+            RegWrite_cancel <= 0; 
             csr_w <= 0;  
             _mepc <= 0; 
             csr_wdata <= 0; 
             csr_waddr <= 0; 
             csr_raddr <= 0; 
-            PC_redirect <= 0; 
-            redirect_mux <= 0; 
             _cause <= 0; 
+            csr_wsc <= 0; 
         end
-        else if(state == idle && (exception || ecall_m))begin
+        else if(state == idle && (exception | ecall_m))begin
             // an exception
             state <= mepc;
             csr_w <= 1;  
@@ -69,8 +75,6 @@ module ExceptionUnit(
             csr_wdata <= {mstatus[31:8], mstatus[3], mstatus[6:4], 1'b0, mstatus[2:0]}; 
             csr_waddr <= 12'h300; 
             csr_raddr <= 0; 
-            PC_redirect <= 0; 
-            redirect_mux <= 0; 
             if(ecall_m)begin
                 _cause <= 11; 
             end
@@ -83,6 +87,12 @@ module ExceptionUnit(
             else if (s_access_fault)begin
                 _cause <= 7; 
             end
+            reg_FD_flush <= 1; 
+            reg_DE_flush <= 1; 
+            reg_EM_flush <= 1; 
+            reg_MW_flush <= 1; 
+            RegWrite_cancel <= 1; 
+            csr_wsc <= 1; 
         end
         else if(state == mepc)begin
             state <= mcause; 
@@ -95,9 +105,13 @@ module ExceptionUnit(
             csr_raddr <= 12'h305; 
             // change PC
             /* maybe questions here */ 
-            PC_redirect <= csr_r_data_out; 
-            redirect_mux <= 1; 
             _cause <= _cause; 
+            reg_FD_flush <= 0; 
+            reg_DE_flush <= 0; 
+            reg_EM_flush <= 0; 
+            reg_MW_flush <= 0; 
+            RegWrite_cancel <= 0; 
+            csr_wsc <= 1; 
         end
         else if(state == mcause)begin
             state <= idle; 
@@ -107,8 +121,12 @@ module ExceptionUnit(
             csr_wdata <= _cause; 
             csr_waddr <= 12'h342; 
             csr_raddr <= 0; 
-            PC_redirect <= 0; 
-            redirect_mux <= 0; 
+            reg_FD_flush <= 0; 
+            reg_DE_flush <= 0; 
+            reg_EM_flush <= 0; 
+            reg_MW_flush <= 0;
+            RegWrite_cancel <= 0; 
+            csr_wsc <= 1; 
         end
         else if(mret)begin
             state <= idle; 
@@ -118,21 +136,29 @@ module ExceptionUnit(
             csr_wdata <= {mstatus[31:8], 1'b1, mstatus[6:4], mstatus[7], mstatus[2:0]}; 
             csr_waddr <= 12'h300; 
             // read mepc
-            csr_raddr <= 12'341; 
+            csr_raddr <= 12'h341; 
             /* maybe questions here */ 
-            PC_redirect <= csr_r_data_out; 
-            redirect_mux <= 1; 
+            reg_FD_flush <= 0; 
+            reg_DE_flush <= 0; 
+            reg_EM_flush <= 0; 
+            reg_MW_flush <= 0;
+            RegWrite_cancel <= 0; 
+            csr_wsc <= 1; 
         end
         else begin
             // normal
             state <= idle; 
-            csr_w <= csr_w_imm_mux; 
+            csr_w <= csr_rw_in ? csr_w_imm_mux : 0; 
             _mepc <= 0; 
-            csr_wdata <= csr_w_data; 
-            csr_waddr <= csr_rw_addr_in; 
-            csr_raddr <= csr_rw_addr_in; 
-            PC_redirect <= 0; 
-            redirect_mux <= 0; 
+            csr_wdata <= csr_rw_in ? csr_w_data : 0; 
+            csr_waddr <= csr_rw_in ? csr_rw_addr_in : 0; 
+            csr_raddr <= csr_rw_in ? csr_rw_addr_in : 0; 
+            reg_FD_flush <= 0; 
+            reg_DE_flush <= 0; 
+            reg_EM_flush <= 0; 
+            reg_MW_flush <= 0;
+            RegWrite_cancel <= 0; 
+            csr_wsc <= csr_wsc_mode_in;  
         end
     end
 
