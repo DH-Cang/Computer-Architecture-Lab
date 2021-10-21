@@ -44,12 +44,10 @@ module ExceptionUnit(
     reg[1:0] state; 
     reg[31:0] _mepc; 
     reg[5:0] _cause; 
-    // the data to write into a csr
-    assign csr_w_data = csr_w_imm_mux ? csr_w_data_imm : csr_w_data_reg; 
     assign exception = illegal_inst | l_access_fault | s_access_fault; 
     // PC
-    assign PC_redirect = (state == mepc || mret && ~rst) ? csr_r_data_out : 0; 
-    assign redirect_mux = (state == mepc || mret && ~rst) ? 1 : 0; 
+    assign PC_redirect = ((state == mepc || mret) && ~rst) ? csr_r_data_out : 0; 
+    assign redirect_mux = ((state == mepc || mret) && ~rst) ? 1 : 0; 
     always @(posedge clk or posedge rst) begin
         if(rst)begin
             state <= idle; 
@@ -148,11 +146,11 @@ module ExceptionUnit(
         else begin
             // normal
             state <= idle; 
-            csr_w <= csr_rw_in ? csr_w_imm_mux : 0; 
+            csr_w <= csr_rw_in & csr_w_data_imm!=5'b00000; 
             _mepc <= 0; 
-            csr_wdata <= csr_rw_in ? csr_w_data : 0; 
-            csr_waddr <= csr_rw_in ? csr_rw_addr_in : 0; 
-            csr_raddr <= csr_rw_in ? csr_rw_addr_in : 0; 
+            csr_wdata <= csr_w_imm_mux ? csr_w_data_imm : csr_w_data_reg; 
+            csr_waddr <= csr_rw_addr_in; 
+            csr_raddr <= csr_rw_addr_in; 
             reg_FD_flush <= 0; 
             reg_DE_flush <= 0; 
             reg_EM_flush <= 0; 

@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Mon Oct 18 10:44:24 2021" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Thu Oct 21 17:18:57 2021" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2020.1 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "2902540" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "WIN64" -context "software_version_and_target_device"
@@ -14,7 +14,7 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "c1ad4601-65e8-4b00-b1cf-81713f577143" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "bd08de18f65a4fff898ed77aa59a84cb" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "24" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "33" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Windows Server 2016 or Windows 10" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "major release  (build 9200)" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz" -context "user_environment"
@@ -27,6 +27,6 @@ webtalk_add_data -client xsim -key trace_waveform -value "true" -context "xsim\\
 webtalk_add_data -client xsim -key runtime -value "1 us" -context "xsim\\usage"
 webtalk_add_data -client xsim -key iteration -value "1" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Simulation_Time -value "0.09_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Simulation_Memory -value "7368_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 3400693500 -regid "" -xml d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.xml -html d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.html -wdm d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Simulation_Memory -value "7348_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 1992321458 -regid "" -xml d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.xml -html d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.html -wdm d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.sim/sim_1/behav/xsim/xsim.dir/core_sim_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

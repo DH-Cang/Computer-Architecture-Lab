@@ -26,6 +26,7 @@ module CSRRegs(
     // mtval:   00110  1  000  011
     // mip:     00110  1  000  100
     assign mstatus = CSR[0];
+    assign mepc = CSR[9]; 
 
     assign rdata = CSR[raddr_map];
 
