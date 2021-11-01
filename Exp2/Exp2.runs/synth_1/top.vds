@@ -2,14 +2,15 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Mon Oct 18 00:25:11 2021
-# Process ID: 3788
+# Start of session at: Mon Nov  1 09:23:19 2021
+# Process ID: 20896
 # Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.runs/synth_1
 # Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.runs/synth_1/top.vds
 # Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source top.tcl -notrace
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1016.832 ; gain = 0.000
 Command: synth_design -top top -part xc7k325tlffg676-2L
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7k325tl'
@@ -17,10 +18,10 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k325
 INFO: [Device 21-403] Loading part xc7k325tlffg676-2L
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 2348
-WARNING: [Synth 8-6901] identifier 'DATA_BITS' is used before its declaration [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:10]
+INFO: [Synth 8-7075] Helper process launched with PID 15192
+WARNING: [Synth 8-6901] identifier 'DATA_BITS' is used before its declaration [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:14]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1045.230 ; gain = 8.910
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:09 . Memory (MB): peak = 1044.688 ; gain = 27.855
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'top' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/top.v:8]
 INFO: [Synth 8-6157] synthesizing module 'clk_diff' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/clk_diff.v:7]
@@ -98,7 +99,7 @@ INFO: [Synth 8-6157] synthesizing module 'display' [d:/Users/lenovo/Desktop/debu
 	Parameter REFRESH_INTERVAL bound to: 100 - type: integer 
 	Parameter COUNT_REFRESH bound to: 2500001 - type: integer 
 	Parameter COUNT_BITS bound to: 22 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'parallel2serial' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:7]
+INFO: [Synth 8-6157] synthesizing module 'parallel2serial' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:10]
 	Parameter P_CLK_FREQ bound to: 25 - type: integer 
 	Parameter S_CLK_FREQ bound to: 20 - type: integer 
 	Parameter DATA_BITS bound to: 16 - type: integer 
@@ -110,10 +111,10 @@ INFO: [Synth 8-6157] synthesizing module 'parallel2serial' [d:/Users/lenovo/Desk
 	Parameter S_CLEAR bound to: 1 - type: integer 
 	Parameter S_WORK bound to: 2 - type: integer 
 	Parameter S_DONE bound to: 3 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:48]
-INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:99]
-INFO: [Synth 8-6155] done synthesizing module 'parallel2serial' (7#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:7]
-INFO: [Synth 8-6157] synthesizing module 'parallel2serial__parameterized0' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:52]
+INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:103]
+INFO: [Synth 8-6155] done synthesizing module 'parallel2serial' (7#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:10]
+INFO: [Synth 8-6157] synthesizing module 'parallel2serial__parameterized0' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:10]
 	Parameter P_CLK_FREQ bound to: 25 - type: integer 
 	Parameter S_CLK_FREQ bound to: 20 - type: integer 
 	Parameter DATA_BITS bound to: 64 - type: integer 
@@ -125,9 +126,9 @@ INFO: [Synth 8-6157] synthesizing module 'parallel2serial__parameterized0' [d:/U
 	Parameter S_CLEAR bound to: 1 - type: integer 
 	Parameter S_WORK bound to: 2 - type: integer 
 	Parameter S_DONE bound to: 3 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:48]
-INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:99]
-INFO: [Synth 8-6155] done synthesizing module 'parallel2serial__parameterized0' (7#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:52]
+INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:103]
+INFO: [Synth 8-6155] done synthesizing module 'parallel2serial__parameterized0' (7#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/parallel2serial.v:10]
 INFO: [Synth 8-6155] done synthesizing module 'display' (8#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/display.v:7]
 INFO: [Synth 8-6157] synthesizing module 'RV32core' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/RV32core.v:4]
 INFO: [Synth 8-6157] synthesizing module 'debug_clk' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/debug_clk.v:3]
@@ -242,6 +243,8 @@ INFO: [Synth 8-6155] done synthesizing module 'CPUTEST' (28#1) [d:/Users/lenovo/
 INFO: [Synth 8-6155] done synthesizing module 'RV32core' (29#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/RV32core.v:4]
 INFO: [Synth 8-6157] synthesizing module 'VGA_TESTP' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/VGATEST.v:21]
 INFO: [Synth 8-6157] synthesizing module 'Code2Inst' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/Code2Inst.v:2]
+INFO: [Synth 8-155] case statement is not full and has no default [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/Code2Inst.v:60]
+INFO: [Synth 8-226] default block is never used [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/Code2Inst.v:80]
 INFO: [Synth 8-6155] done synthesizing module 'Code2Inst' (30#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/Code2Inst.v:2]
 INFO: [Synth 8-226] default block is never used [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/VGATEST.v:167]
 INFO: [Synth 8-226] default block is never used [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/VGATEST.v:206]
@@ -321,18 +324,18 @@ INFO: [Synth 8-6155] done synthesizing module 'vga' (33#1) [d:/Users/lenovo/Desk
 INFO: [Synth 8-6155] done synthesizing module 'VGA_TESTP' (34#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/VGATEST.v:21]
 INFO: [Synth 8-6155] done synthesizing module 'top' (35#1) [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/top.v:8]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 1141.871 ; gain = 105.551
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:13 . Memory (MB): peak = 1146.258 ; gain = 129.426
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1141.871 ; gain = 105.551
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 1146.258 ; gain = 129.426
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1141.871 ; gain = 105.551
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 1146.258 ; gain = 129.426
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.174 . Memory (MB): peak = 1141.871 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.483 . Memory (MB): peak = 1146.258 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -346,28 +349,28 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl
 INFO: [Timing 38-2] Deriving generated clocks
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1286.879 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1303.340 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   IBUFGDS => IBUFDS: 1 instance 
   RAMB16_S1 => RAMB18E1: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.084 . Memory (MB): peak = 1286.879 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.119 . Memory (MB): peak = 1303.340 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 1286.879 ; gain = 250.559
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:31 . Memory (MB): peak = 1303.340 ; gain = 286.508
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7k325tlffg676-2L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 1286.879 ; gain = 250.559
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:31 . Memory (MB): peak = 1303.340 ; gain = 286.508
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 1286.879 ; gain = 250.559
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:31 . Memory (MB): peak = 1303.340 ; gain = 286.508
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'btn_x_reg' in module 'btn_scan'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'parallel2serial'
@@ -406,14 +409,15 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-                  iSTATE |                              001 |                               00
-                 iSTATE1 |                              010 |                               01
-                 iSTATE0 |                              100 |                               10
+                  iSTATE |                              100 |                               00
+                 iSTATE1 |                              001 |                               01
+                 iSTATE0 |                              010 |                               10
 *
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'ExceptionUnit'
+WARNING: [Synth 8-327] inferring latch for variable 'inst_reg' [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/auxillary/Code2Inst.v:30]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:29 . Memory (MB): peak = 1286.879 ; gain = 250.559
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:00:39 . Memory (MB): peak = 1303.340 ; gain = 286.508
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -424,7 +428,7 @@ Detailed RTL Component Info :
 	   2 Input   32 Bit       Adders := 13    
 	   3 Input   32 Bit       Adders := 1     
 	   2 Input   10 Bit       Adders := 4     
-	   2 Input    7 Bit       Adders := 4     
+	   2 Input    7 Bit       Adders := 64    
 	   2 Input    6 Bit       Adders := 1     
 	   2 Input    5 Bit       Adders := 1     
 	   2 Input    4 Bit       Adders := 1     
@@ -435,58 +439,64 @@ Detailed RTL Component Info :
 +---Registers : 
 	               65 Bit    Registers := 1     
 	               57 Bit    Registers := 1     
-	               32 Bit    Registers := 71    
+	               32 Bit    Registers := 70    
 	               20 Bit    Registers := 1     
 	               17 Bit    Registers := 1     
 	               16 Bit    Registers := 1     
-	               12 Bit    Registers := 2     
 	               10 Bit    Registers := 2     
 	                8 Bit    Registers := 129   
 	                6 Bit    Registers := 2     
 	                5 Bit    Registers := 6     
 	                4 Bit    Registers := 6     
 	                3 Bit    Registers := 2     
-	                2 Bit    Registers := 5     
-	                1 Bit    Registers := 39    
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 37    
 +---RAMs : 
 	              128 Bit	(4 X 32 bit)          RAMs := 1     
 +---Muxes : 
 	   2 Input 1024 Bit        Muxes := 2     
+	   4 Input  152 Bit        Muxes := 5     
+	   2 Input  152 Bit        Muxes := 10    
+	  11 Input  152 Bit        Muxes := 5     
+	   3 Input  152 Bit        Muxes := 5     
+	   4 Input  151 Bit        Muxes := 5     
+	   2 Input  151 Bit        Muxes := 5     
+	   2 Input  116 Bit        Muxes := 5     
 	   4 Input   65 Bit        Muxes := 1     
 	   4 Input   57 Bit        Muxes := 1     
 	   2 Input   39 Bit        Muxes := 1     
-	   2 Input   32 Bit        Muxes := 24    
+	   2 Input   32 Bit        Muxes := 23    
 	  46 Input   32 Bit        Muxes := 1     
 	   4 Input   32 Bit        Muxes := 1     
-	   3 Input   32 Bit        Muxes := 1     
 	   2 Input   24 Bit        Muxes := 1     
 	   2 Input   20 Bit        Muxes := 1     
 	   4 Input   17 Bit        Muxes := 1     
 	   2 Input   16 Bit        Muxes := 1     
-	   2 Input   12 Bit        Muxes := 6     
-	   3 Input   12 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 2     
 	   5 Input   12 Bit        Muxes := 1     
 	   2 Input   10 Bit        Muxes := 1     
 	   2 Input    8 Bit        Muxes := 211   
 	   3 Input    8 Bit        Muxes := 52    
+	   2 Input    7 Bit        Muxes := 71    
 	  16 Input    7 Bit        Muxes := 8     
-	   2 Input    7 Bit        Muxes := 11    
 	   6 Input    6 Bit        Muxes := 1     
 	   4 Input    6 Bit        Muxes := 1     
 	   2 Input    5 Bit        Muxes := 4     
 	   6 Input    5 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 6     
+	   5 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 5     
+	  11 Input    4 Bit        Muxes := 5     
 	   4 Input    4 Bit        Muxes := 2     
 	  16 Input    4 Bit        Muxes := 8     
-	   3 Input    3 Bit        Muxes := 2     
-	   3 Input    2 Bit        Muxes := 7     
-	   2 Input    2 Bit        Muxes := 10    
-	   4 Input    2 Bit        Muxes := 3     
-	   2 Input    1 Bit        Muxes := 68    
-	   3 Input    1 Bit        Muxes := 1     
-	   4 Input    1 Bit        Muxes := 10    
-	   5 Input    1 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 6     
+	   2 Input    2 Bit        Muxes := 8     
+	   4 Input    2 Bit        Muxes := 8     
+	   2 Input    1 Bit        Muxes := 62    
+	   5 Input    1 Bit        Muxes := 3     
+	  14 Input    1 Bit        Muxes := 5     
 	   6 Input    1 Bit        Muxes := 5     
+	   4 Input    1 Bit        Muxes := 10    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -503,7 +513,7 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:12 ; elapsed = 00:01:20 . Memory (MB): peak = 1490.473 ; gain = 454.152
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:32 ; elapsed = 00:01:45 . Memory (MB): peak = 1497.977 ; gain = 481.145
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -514,7 +524,7 @@ ROM: Preliminary Mapping	Report
 |Module Name | RTL Object | Depth x Width | Implemented As | 
 +------------+------------+---------------+----------------+
 |VGA_TESTP   | strdata    | 32x49         | LUT            | 
-|VGA_TESTP   | strdata    | 32x49         | LUT            | 
+|top         | strdata    | 32x49         | LUT            | 
 +------------+------------+---------------+----------------+
 
 
@@ -522,7 +532,7 @@ Distributed RAM: Preliminary Mapping	Report (see note below)
 +------------+--------------+-----------+----------------------+-------------+
 |Module Name | RTL Object   | Inference | Size (Depth x Width) | Primitives  | 
 +------------+--------------+-----------+----------------------+-------------+
-|i_0/vga     | data_buf_reg | Implied   | 4 x 32               | RAM32M x 6	 | 
+|top         | data_buf_reg | Implied   | 4 x 32               | RAM32M x 6	 | 
 +------------+--------------+-----------+----------------------+-------------+
 
 Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
@@ -533,13 +543,13 @@ Finished ROM, RAM, DSP and Shift Register Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:20 ; elapsed = 00:01:28 . Memory (MB): peak = 1490.473 ; gain = 454.152
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:41 ; elapsed = 00:01:55 . Memory (MB): peak = 1497.977 ; gain = 481.145
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:51 ; elapsed = 00:01:59 . Memory (MB): peak = 1504.191 ; gain = 467.871
+Finished Timing Optimization : Time (s): cpu = 00:01:57 ; elapsed = 00:02:11 . Memory (MB): peak = 1497.977 ; gain = 481.145
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -549,7 +559,7 @@ Distributed RAM: Final Mapping	Report
 +------------+--------------+-----------+----------------------+-------------+
 |Module Name | RTL Object   | Inference | Size (Depth x Width) | Primitives  | 
 +------------+--------------+-----------+----------------------+-------------+
-|i_0/vga     | data_buf_reg | Implied   | 4 x 32               | RAM32M x 6	 | 
+|top         | data_buf_reg | Implied   | 4 x 32               | RAM32M x 6	 | 
 +------------+--------------+-----------+----------------------+-------------+
 
 ---------------------------------------------------------------------------------
@@ -559,7 +569,7 @@ Finished ROM, RAM, DSP and Shift Register Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:58 ; elapsed = 00:02:07 . Memory (MB): peak = 1511.156 ; gain = 474.836
+Finished Technology Mapping : Time (s): cpu = 00:02:07 ; elapsed = 00:02:21 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -577,37 +587,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:02:04 ; elapsed = 00:02:12 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished IO Insertion : Time (s): cpu = 00:02:13 ; elapsed = 00:02:27 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:04 ; elapsed = 00:02:12 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:13 ; elapsed = 00:02:27 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:05 ; elapsed = 00:02:13 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:15 ; elapsed = 00:02:29 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:05 ; elapsed = 00:02:13 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:15 ; elapsed = 00:02:29 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:17 ; elapsed = 00:02:31 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:18 ; elapsed = 00:02:31 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -637,53 +647,59 @@ Report Cell Usage:
 +------+-----------+------+
 |      |Cell       |Count |
 +------+-----------+------+
-|1     |BUFG       |     6|
+|1     |BUFG       |    11|
 |2     |CARRY4     |    74|
 |3     |LUT1       |    10|
-|4     |LUT2       |   219|
-|5     |LUT3       |   582|
-|6     |LUT4       |   549|
-|7     |LUT5       |   914|
-|8     |LUT6       |  4901|
+|4     |LUT2       |   356|
+|5     |LUT3       |   897|
+|6     |LUT4       |   884|
+|7     |LUT5       |  1596|
+|8     |LUT6       |  6952|
 |9     |MMCME2_ADV |     1|
-|10    |MUXF7      |   871|
-|11    |MUXF8      |   253|
+|10    |MUXF7      |   949|
+|11    |MUXF8      |   283|
 |12    |RAM32M     |     6|
 |13    |RAMB16_S1  |     1|
 |14    |SRL16E     |     7|
-|15    |FDCE       |  1355|
+|15    |FDCE       |  1319|
 |16    |FDPE       |    17|
-|17    |FDRE       |  1514|
+|17    |FDRE       |  1694|
 |18    |FDSE       |    20|
-|19    |IBUF       |    15|
-|20    |IBUFGDS    |     1|
-|21    |OBUF       |    25|
+|19    |LDC        |   315|
+|20    |LDCP       |    75|
+|21    |LDP        |   235|
+|22    |IBUF       |    15|
+|23    |IBUFGDS    |     1|
+|24    |OBUF       |    25|
 +------+-----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:18 ; elapsed = 00:02:31 . Memory (MB): peak = 1504.090 ; gain = 487.258
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:53 ; elapsed = 00:02:07 . Memory (MB): peak = 1512.492 ; gain = 331.164
-Synthesis Optimization Complete : Time (s): cpu = 00:02:06 ; elapsed = 00:02:14 . Memory (MB): peak = 1512.492 ; gain = 476.172
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:02 ; elapsed = 00:02:21 . Memory (MB): peak = 1504.090 ; gain = 330.176
+Synthesis Optimization Complete : Time (s): cpu = 00:02:18 ; elapsed = 00:02:32 . Memory (MB): peak = 1504.090 ; gain = 487.258
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.167 . Memory (MB): peak = 1512.492 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 1207 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.213 . Memory (MB): peak = 1504.090 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1940 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1512.492 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1504.090 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 8 instances were transformed.
+  A total of 633 instances were transformed.
   IBUFGDS => IBUFDS: 1 instance 
+  LDC => LDCE: 315 instances
+  LDCP => LDCP (GND, LDCE, LUT3(x2), VCC): 75 instances
+  LDP => LDPE: 235 instances
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 6 instances
   RAMB16_S1 => RAMB18E1: 1 instance 
 
 INFO: [Common 17-83] Releasing license: Synthesis
-107 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+109 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:15 ; elapsed = 00:02:33 . Memory (MB): peak = 1512.492 ; gain = 476.172
+synth_design: Time (s): cpu = 00:02:28 ; elapsed = 00:02:54 . Memory (MB): peak = 1504.090 ; gain = 487.258
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.runs/synth_1/top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon Oct 18 00:27:52 2021...
+INFO: [Common 17-206] Exiting Vivado at Mon Nov  1 09:26:56 2021...

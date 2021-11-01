@@ -1,0 +1,65 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Thu Oct 21 15:50:21 2021
+# Process ID: 16292
+# Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18016 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp2\Exp2.xpr
+# Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/vivado.log
+# Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/Exp2.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 150
+restart
+run all
+run all
+run all
+run all
+run all
+run all
+run all
+run all
+run all
+run all
+run all
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 150
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 150
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 150
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 69
+restart
+run all
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 71
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 69
+run all
+restart
+relaunch_sim
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 132
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 132
+add_bp {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} 150
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 71
+run all
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+remove_bps -file {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/core/ExceptionUnit.v} -line 150
+run all
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp2/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+close_sim
