@@ -1,7 +1,16 @@
-Vivado Simulator 2018.2
-Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: D:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto d1679025e5ba4cbfbcb9c4155652141f --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot cache_sim_behav xil_defaultlib.cache_sim xil_defaultlib.glbl -log elaborate.log 
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: E:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto d1679025e5ba4cbfbcb9c4155652141f --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot cache_sim_behav xil_defaultlib.cache_sim xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
+Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/cache.v" Line 5. Module cache_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/cache.v" Line 5. Module cache_default doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.cache_default
+Compiling module xil_defaultlib.cache_sim
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot cache_sim_behav

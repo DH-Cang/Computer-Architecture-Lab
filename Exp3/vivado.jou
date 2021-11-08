@@ -1,0 +1,28 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Mon Nov  8 08:17:31 2021
+# Process ID: 1160
+# Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17736 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp3\Exp3.xpr
+# Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/vivado.log
+# Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/Exp3.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/wave/cache_sim_behav.wcfg
+source cache_sim.tcl
+save_wave_config {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/wave/cache_sim_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/wave/cache_sim_behav.wcfg
+source cache_sim.tcl
+close_sim
+launch_simulation
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/wave/cache_sim_behav.wcfg
+source cache_sim.tcl
+save_wave_config {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/wave/cache_sim_behav.wcfg}
+close_sim

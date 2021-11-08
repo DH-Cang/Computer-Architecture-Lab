@@ -1,8 +1,8 @@
-0.6
-2018.2
-Jun 14 2018
-20:41:02
-C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/Exp3.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
-C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/code/addr_define.vh,1630841752,verilog,,,,,,,,,,,,
-C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/code/cache.v,1630841847,verilog,,C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/code/sim/cache_sim.v,C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/code/addr_define.vh,cache,,,../../../../code,,,,,
-C:/Users/Zonghui Wang/Desktop/risc v/Code4Teach/Exp3/code/sim/cache_sim.v,1628584874,verilog,,,,cache_sim,,,../../../../code,,,,,
+0.7
+2020.1
+May 27 2020
+20:09:33
+d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/Exp3.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/addr_define.vh,1630841752,verilog,,,,,,,,,,,,
+d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/cache.v,1636333846,verilog,,d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/sim/cache_sim.v,d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/addr_define.vh,cache,,,../../../../code,,,,,
+d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp3/code/sim/cache_sim.v,1628584874,verilog,,,,cache_sim,,,../../../../code,,,,,

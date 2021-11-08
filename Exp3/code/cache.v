@@ -85,9 +85,9 @@ module cache (
     assign hit2 = valid2 & (tag2 == addr_tag);                 //need to fill in
 
     always @ (posedge clk) begin
-        valid <= hit1 ? valid1 : valid2;                  //need to fill in
-        dirty <= hit1 ? dirty1 : dirty2;                  //need to fill in
-        tag <= hit1 ? tag1 : tag2;                    //need to fill in
+        valid <= recent1 ? valid2 : valid1;                  //need to fill in
+        dirty <= recent1 ? dirty2 : dirty1;                  //need to fill in
+        tag <= recent1 ? tag2 : tag1;                    //need to fill in
         hit <= hit1 | hit2;                    //need to fill in
         
         // read $ with load==0 means moving data from $ to mem
@@ -148,6 +148,30 @@ module cache (
             end
             else if (hit2) begin
                     //need to fill in
+                inner_data[addr_word2] <= 
+                    u_b_h_w[1] ?        // word?
+                        din
+                    :
+                        u_b_h_w[0] ?    // half word?
+                            addr[1] ?       // upper / lower?
+                                {din[15:0], word2[15:0]} 
+                            :
+                                {word2[31:16], din[15:0]} 
+                        :   // byte
+                            addr[1] ?
+                                addr[0] ?
+                                    {din[7:0], word2[23:0]}   // 11
+                                :
+                                    {word2[31:24], din[7:0], word2[15:0]} // 10
+                            :
+                                addr[0] ?
+                                    {word2[31:16], din[7:0], word2[7:0]}   // 01
+                                :
+                                    {word2[31:8], din[7:0]} // 00
+                ;
+                inner_dirty[addr_element2] <= 1'b1;
+                inner_recent[addr_element1] <= 1'b0;
+                inner_recent[addr_element2] <= 1'b1;
             end
         end
 
