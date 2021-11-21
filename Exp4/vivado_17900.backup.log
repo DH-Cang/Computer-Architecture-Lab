@@ -2,10 +2,10 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sun Nov 21 17:24:40 2021
-# Process ID: 17484
+# Start of session at: Sun Nov 21 17:07:37 2021
+# Process ID: 17900
 # Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18212 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp4\Exp4.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17988 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp4\Exp4.xpr
 # Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/vivado.log
 # Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4\vivado.jou
 #-----------------------------------------------------------
@@ -20,7 +20,7 @@ INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2020.1/data/ip'.
 WARNING: [IP_Flow 19-2162] IP 'ROM_D' is locked:
 * IP definition 'Distributed Memory Generator (8.0)' for IP 'ROM_D' (customized with software release 2018.2) has a different revision in the IP Catalog.
-open_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 1023.211 ; gain = 0.000
+open_project: Time (s): cpu = 00:00:22 ; elapsed = 00:00:32 . Memory (MB): peak = 936.172 ; gain = 0.000
 update_compile_order -fileset sources_1
 launch_simulation
 Command: launch_simulation 
@@ -39,7 +39,21 @@ INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
 INFO: [USF-XSim-2] XSim::Compile design
 INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
 "xvlog --incr --relax -prj sim_top_vlog.prj"
-INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cache.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cache
+WARNING: [VRFC 10-3380] identifier 'ADDR_BITS' is used before its declaration [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cache.v:8]
+WARNING: [VRFC 10-3380] identifier 'TAG_BITS' is used before its declaration [d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cache.v:20]
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cmu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cmu
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/sim/cmu_sim.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cmu_sim
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/sim/data_ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/sim/inst.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module inst
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/sim/sim_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sim_top
+INFO: [USF-XSim-69] 'compile' step finished in '5' seconds
 INFO: [USF-XSim-3] XSim::Elaborate design
 INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
 "xelab -wto 6b382772ef754ad2ae155e9aebccdccf --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot sim_top_behav xil_defaultlib.sim_top xil_defaultlib.glbl -log elaborate.log"
@@ -50,8 +64,32 @@ Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
-INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cmu.v" Line 1. Module cmu_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cache.v" Line 5. Module cache_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cmu.v" Line 1. Module cmu_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/cache.v" Line 5. Module cache_default doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.inst
+Compiling module xil_defaultlib.data_ram
+Compiling module xil_defaultlib.cache_default
+Compiling module xil_defaultlib.cmu_default
+Compiling module xil_defaultlib.cmu_sim
+Compiling module xil_defaultlib.sim_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot sim_top_behav
+
+****** Webtalk v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim/xsim.dir/sim_top_behav/webtalk/xsim_webtalk.tcl -notrace
+webtalk_transmit: Time (s): cpu = 00:00:00 ; elapsed = 00:00:12 . Memory (MB): peak = 97.211 ; gain = 17.668
+INFO: [Common 17-206] Exiting Webtalk at Sun Nov 21 17:10:53 2021...
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:33 . Memory (MB): peak = 975.254 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '32' seconds
 INFO: [USF-XSim-4] XSim::Simulate design
 INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
 INFO: [USF-XSim-98] *** Running xsim
@@ -71,11 +109,12 @@ source sim_top.tcl
 #   }
 # }
 # run 1000ns
+xsim: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 975.254 ; gain = 0.000
 INFO: [USF-XSim-96] XSim completed. Design snapshot 'sim_top_behav' loaded.
 INFO: [USF-XSim-97] XSim simulation ran for 1000ns
-launch_simulation: Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1023.211 ; gain = 0.000
-run 10 us
+launch_simulation: Time (s): cpu = 00:00:15 ; elapsed = 00:00:48 . Memory (MB): peak = 975.254 ; gain = 0.000
 close_sim
 INFO: [Simtcl 6-16] Simulation closed
+close_sim: Time (s): cpu = 00:00:02 ; elapsed = 00:00:09 . Memory (MB): peak = 981.312 ; gain = 0.000
 exit
-INFO: [Common 17-206] Exiting Vivado at Sun Nov 21 17:28:54 2021...
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 21 17:13:16 2021...

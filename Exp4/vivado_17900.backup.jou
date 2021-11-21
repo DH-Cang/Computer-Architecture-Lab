@@ -2,10 +2,10 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sun Nov 21 17:24:40 2021
-# Process ID: 17484
+# Start of session at: Sun Nov 21 17:07:37 2021
+# Process ID: 17900
 # Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18212 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp4\Exp4.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17988 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp4\Exp4.xpr
 # Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/vivado.log
 # Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4\vivado.jou
 #-----------------------------------------------------------
@@ -15,5 +15,4 @@ update_compile_order -fileset sources_1
 launch_simulation
 open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/wave/sim_top_behav.wcfg
 source sim_top.tcl
-run 10 us
 close_sim
