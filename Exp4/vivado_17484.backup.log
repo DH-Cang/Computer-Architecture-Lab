@@ -1,0 +1,81 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Sun Nov 21 17:24:40 2021
+# Process ID: 17484
+# Current directory: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18212 d:\Users\lenovo\Desktop\debugzju\nightmare\architecture\lab\Computer-Architecture-Lab\Exp4\Exp4.xpr
+# Log file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/vivado.log
+# Journal file: d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.xpr
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4'
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2020.1/data/ip'.
+WARNING: [IP_Flow 19-2162] IP 'ROM_D' is locked:
+* IP definition 'Distributed Memory Generator (8.0)' for IP 'ROM_D' (customized with software release 2018.2) has a different revision in the IP Catalog.
+open_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:12 . Memory (MB): peak = 1023.211 ; gain = 0.000
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'E:/Xilinx/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-20] The project contains locked or custom IPs. The pre-compiled version of these IPs will not be referenced and the sources from these IP libraries will be compiled locally.
+INFO: [SIM-utils-54] Inspecting design source files for 'sim_top' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim/ROM_D.mif'
+INFO: [SIM-utils-43] Exported 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim/mem_test.coe'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj sim_top_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
+"xelab -wto 6b382772ef754ad2ae155e9aebccdccf --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot sim_top_behav xil_defaultlib.sim_top xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: E:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto 6b382772ef754ad2ae155e9aebccdccf --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot sim_top_behav xil_defaultlib.sim_top xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'd:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/Exp4.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "sim_top_behav -key {Behavioral:sim_1:Functional:sim_top} -tclbatch {sim_top.tcl} -view {d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/wave/sim_top_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.1
+Time resolution is 1 ps
+open_wave_config d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp4/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'sim_top_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1023.211 ; gain = 0.000
+run 10 us
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+exit
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 21 17:28:54 2021...
