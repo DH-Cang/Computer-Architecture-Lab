@@ -17,7 +17,7 @@ module FU_mul(
 
     //to fill sth.in
     always @(posedge clk) begin
-        if(EN & ~|state)begin
+        if(EN & ~|state)begin   // enable == 1 && state == 0
             A_reg <= A; 
             B_reg <= B; 
             state <= 7'b1000000; 

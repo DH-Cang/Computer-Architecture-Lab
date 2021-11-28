@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:mult_gen:12.0
--- IP Revision: 14
+-- IP Revision: 16
 
 -- The following code must appear in the VHDL architecture header.
 

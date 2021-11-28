@@ -234,6 +234,6 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="multiplier"/>
   <BlockFileSet Type="BlockSrcs" Name="divider"/>
+  <BlockFileSet Type="BlockSrcs" Name="multiplier"/>
 </GenRun>
