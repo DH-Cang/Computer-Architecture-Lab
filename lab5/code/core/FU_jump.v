@@ -33,9 +33,9 @@ module FU_jump(
 		end
 	end
 
-	assign PC_jump = 'b0; 	// to be done
-	assign PC_wb = 'b0;		// to be done
-	assign cmp_res = 'b0;	// to be done
+	add_32 adder_pc_jump(PC_reg, imm_reg, PC_jump);
+	add_32 adder_pc_wb(PC_reg, 'd4, PC_wb);
+	cmp_32 cmp(rs1_data_reg, rs2_data_reg, cmp_ctrl_reg, cmp_res);
 
 
 
