@@ -13,6 +13,7 @@ module FU_mul(
         state = 0;
     end
 
+    wire[63:0] mulres; 
     reg[31:0] A_reg, B_reg;
 
     //to fill sth.in

@@ -1,0 +1,38 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/CtrlUnit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CtrlUnit
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/FU_ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FU_ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/FU_div.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FU_div
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/FU_jump.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FU_jump
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/FU_mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FU_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/FU_mul.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FU_mul
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/ImmGen.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ImmGen
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/common/MUX2T1_32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MUX2T1_32
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/common/MUX8T1_32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MUX8T1_32
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/RAM_B.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RAM_B
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/common/REG32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module REG32
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/REG_ID.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module REG_ID
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/ROM_D.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ROM_D
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/RV32core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RV32core
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/core/Regs.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Regs
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/common/add_32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module add_32
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/common/cmp_32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cmp_32
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/auxillary/debug_clk.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module debug_clk
+INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/lab5/code/sim/core_sim.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module core_sim

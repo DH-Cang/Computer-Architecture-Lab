@@ -27,12 +27,14 @@ module FU_mem(
             rs2_data_reg <= rs2_data;
             imm_reg <= imm;
             state <= 'b10;
-        end else if (state == 'b10) begin
-            state <= 'b01;
-        end else if (state == 'b01) begin
-            state <= 'b00;
+        end 
+        else begin
+            state <= state >> 1;
         end
     end
+
+    wire [31:0]addr; 
+    add_32 adder(rs1_data_reg, imm_reg, addr);
 
     RAM_B ram(.clka(clk),.addra(addr),.dina(rs2_data_reg),.wea(mem_w_reg),
         .douta(mem_data),.mem_u_b_h_w(bhw_reg));

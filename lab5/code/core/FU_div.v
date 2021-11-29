@@ -31,7 +31,7 @@ module FU_div(
         else if(res_valid) begin
             A_valid <= 0; 
             B_valid <= 0; 
-            state <= 0
+            state <= 0; 
         end
     end
 
