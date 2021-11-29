@@ -18,6 +18,25 @@ module FU_jump(
 	reg[2:0] cmp_ctrl_reg;
 	reg[31:0] rs1_data_reg, rs2_data_reg, imm_reg, PC_reg;
 
-	...            //to fill sth.in
+	//to fill sth.in
+	always@(posedge clk) begin
+		if(EN & ~state) begin
+			JALR_reg <= JALR;
+			cmp_ctrl_reg <= cmp_ctrl;
+			rs1_data_reg <= rs1_data;
+			rs2_data_reg <= rs2_data;
+			imm_reg <= imm;
+			PC_reg <= PC;
+			state <= 1;
+		end else if(state == 1) begin
+			state <= 0;
+		end
+	end
+
+	assign PC_jump = 'b0; 	// to be done
+	assign PC_wb = 'b0;		// to be done
+	assign cmp_res = 'b0;	// to be done
+
+
 
 endmodule
