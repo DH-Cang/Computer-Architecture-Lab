@@ -62,7 +62,7 @@ module  RV32core(
         .ALUSrcA(ALUSrcA_ctrl),.ALUSrcB(ALUSrcB_ctrl),
         .write_sel(DatatoReg_ctrl),.reg_write(RegWrite_ctrl),.rd_ctrl(rd_ctrl));
 
-    ImmGen imm_gen(...);            //to fill sth.in
+    ImmGen imm_gen(ImmSel_ctrl, inst_ID, Imm_out_ID);            //to fill sth.in
 
     Regs register(.clk(debug_clk),.rst(rst),
         .R_addr_A(inst_ID[19:15]),.rdata_A(rs1_data_ID),
@@ -70,9 +70,9 @@ module  RV32core(
         .L_S(RegWrite_ctrl),.Wt_addr(rd_ctrl),.Wt_data(wt_data_WB),
         .Debug_addr(debug_addr[4:0]),.Debug_regs(debug_regs));
 
-    MUX2T1_32 mux_imm_ALU_ID_A(...);            //to fill sth.in
+    MUX2T1_32 mux_imm_ALU_ID_A(rs1_data_ID, PC_ID, ALUSrcA_ctrl, ALUA_ID);            //to fill sth.in
 
-    MUX2T1_32 mux_imm_ALU_ID_B(...);            //to fill sth.in
+    MUX2T1_32 mux_imm_ALU_ID_B(rs2_data_ID, Imm_out_ID, ALUSrcB_ctrl, ALUB_ID);            //to fill sth.in
 
 
     // FU
@@ -106,7 +106,19 @@ module  RV32core(
     
     REG32 reg_WB_jump(.clk(debug_clk),.rst(rst),.CE(FU_jump_finish),.D(PC_wb_FU),.Q(PC_wb_WB));
 
-    MUX8T1_32 mux_DtR(...);         //to fill sth.in
+    //to fill sth.in
+    MUX8T1_32 mux_DtR(
+        .s(DatatoReg_ctrl),
+        .I0('d0),               // use nothing
+        .I1(ALUout_WB),         // use ALU
+        .I2(mem_data_WB),       // use MEM
+        .I3(mulres_WB),         // use MUL
+        .I4(divres_WB),         // use DIV
+        .I5(PC_wb_WB),          // use JUMP
+        .I6('d0),               // use nothing
+        .I7('d0),               // use nothing
+        .o(wt_data_WB)
+    );         
 
 
     always @* begin
