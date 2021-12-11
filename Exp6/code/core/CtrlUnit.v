@@ -51,7 +51,7 @@ module CtrlUnit(
     reg[31:0] IMM[1:5];
 
     // records which FU will write corresponding reg at WB
-    // Register Record Status
+    // Register Record Status, 3 bits for each register
     reg[2:0] RRS[0:31];
 
     // sometimes an instruction needs PC to execute
@@ -183,6 +183,7 @@ module CtrlUnit(
         end
     end
 
+    // flush IS if there is a jump (JUMP_done and is_jump are both inputs)
     always @ (posedge clk or posedge rst) begin
         if (rst) begin
             IS_flush <= 0;
@@ -195,14 +196,17 @@ module CtrlUnit(
         end
     end
 
+    // stop issuing until result is known
     assign jump_stall = FUS[`FU_JUMP][`BUSY] & (~JUMP_done);
 
+    // which Function Unit to be used for this instruction
     wire[2:0] use_FU = {3{use_ALU}}  & `FU_ALU  |
                        {3{use_MEM}}  & `FU_MEM  |
                        {3{use_MUL}}  & `FU_MUL  |
                        {3{use_DIV}}  & `FU_DIV  |
                        {3{use_JUMP}} & `FU_JUMP ;
 
+    // operation indicated by this instruction
     wire[4:0] op = {5{ADD}}          & `ALU_ADD    |
                    {5{SUB}}          & `ALU_SUB    |
                    {5{AND}}          & `ALU_AND    |
@@ -249,11 +253,16 @@ module CtrlUnit(
                    {5{JAL}}          & `JUMP_JAL   |
                    {5{JALR}}         & `JUMP_JALR  ;
 
+    // destination register
     wire[4:0] dst = {5{R_valid | I_valid | L_valid | LUI | AUIPC | JAL | JALR}} & rd;
+    // source 1 register
     wire[4:0] src1 = {5{R_valid | I_valid | S_valid | L_valid | B_valid | JALR}} & rs1;
+    // source 2 register
     wire[4:0] src2 = {5{R_valid | S_valid | B_valid}} & rs2;
+    // Function Units that will write src1 and src2 
     wire[2:0] fu1 = RRS[src1];
     wire[2:0] fu2 = RRS[src2];
+    // will be cleared if it is ready
     wire rdy1 = ~|fu1;
     wire rdy2 = ~|fu2;
 
@@ -335,18 +344,26 @@ module CtrlUnit(
         end
 
         else begin
-            // IS
+            // IS issue
             if (RO_en) begin
                 // not busy, no WAW, write info to FUS and RRS
                 if (|dst) RRS[dst] <= use_FU;
                 FUS[use_FU][`BUSY] <= 1'b1;
-                ...                             //fill sth. here.
-                
+                FUS[use_FU][`OP_H:`OP_L] <=                          //fill sth. here.
+                FUS[use_FU][`DST_H:`DST_L] <= 
+                FUS[use_FU][`SRC1_H:`SRC1_L] <= 
+                FUS[use_FU][`SRC2_H:`SRC2_L] <= 
+                FUS[use_FU][`FU1_H:`FU1_L] <= 
+                FUS[use_FU][`FU2_H:`FU2_L] <= 
+                FUS[use_FU][`RDY1] <= 
+                FUS[use_FU][`RDY2] <= 
+                FUS[use_FU][`FU_DONE] <= 
+
                 IMM[use_FU] <= imm;
                 PCR[use_FU] <= PC;
             end
 
-            // RO
+            // RO read operands
             if (FUS[`FU_JUMP][`RDY1] & FUS[`FU_JUMP][`RDY2]) begin
                 // JUMP
                 FUS[`FU_JUMP][`RDY1] <= 1'b0;
@@ -369,11 +386,11 @@ module CtrlUnit(
                 ...                         //fill sth. here.
             end
 
-            // EX
-            FUS[`FU_ALU][`FU_DONE] <= ...   //fill sth. here
-            ...                             //fill sth. here
+            // EX execute
+            FUS[`FU_ALU][`FU_DONE] <= ALU_done   //fill sth. here
+            FUS[`FU_MEM][`FU_DONE] <= ...              //fill sth. here
 
-            // WB
+            // WB write back
             if (FUS[`FU_JUMP][`FU_DONE] & JUMP_WAR) begin
                 FUS[`FU_JUMP] <= 32'b0;
                 RRS[FUS[`FU_JUMP][`DST_H:`DST_L]] <= 3'b0;
@@ -402,6 +419,7 @@ module CtrlUnit(
 
     // ctrl signals should be combinational logic
     // RO
+    // assign values if everything ready
     always @ (*) begin
         ALU_en = 0;
         MEM_en = 0;
@@ -493,6 +511,7 @@ module CtrlUnit(
     end
 
     // WB
+    // assign values if everything ready
     always @ (*) begin
         write_sel = 0;
         reg_write = 0;
