@@ -2,8 +2,6 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Users/lenovo/Desktop/debugzju/ni
 INFO: [VRFC 10-311] analyzing module Code2Inst
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/core/CtrlUnit.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module CtrlUnit
-WARNING: [VRFC 10-3380] identifier 'dst' is used before its declaration [D:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/core/CtrlUnit.v:171]
-WARNING: [VRFC 10-3380] identifier 'use_FU' is used before its declaration [D:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/core/CtrlUnit.v:182]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/core/FU_ALU.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module FU_ALU
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/core/FU_div.v" into library xil_defaultlib
