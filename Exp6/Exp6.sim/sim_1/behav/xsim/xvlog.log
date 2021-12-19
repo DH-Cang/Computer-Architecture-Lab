@@ -61,5 +61,3 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/ni
 INFO: [VRFC 10-311] analyzing module vga
 INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/code/sim/sim_top.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module sim_top
-INFO: [VRFC 10-2263] Analyzing Verilog file "d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/Exp6.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module glbl

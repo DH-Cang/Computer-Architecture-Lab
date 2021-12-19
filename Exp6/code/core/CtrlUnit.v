@@ -162,15 +162,15 @@ module CtrlUnit(
     wire use_DIV = DIV | DIVU | REM | REMU;
     wire use_JUMP = B_valid | JAL | JALR;
 
+    assign IS_en = IS_flush | ~normal_stall & ~ctrl_stall;
+    assign RO_en = ~IS_flush & ~normal_stall & ~ctrl_stall;
+
     // which Function Unit to be used for this instruction
     wire[2:0] use_FU = {3{use_ALU}}  & `FU_ALU  |
                        {3{use_MEM}}  & `FU_MEM  |
                        {3{use_MUL}}  & `FU_MUL  |
                        {3{use_DIV}}  & `FU_DIV  |
                        {3{use_JUMP}} & `FU_JUMP ;
-
-    assign IS_en = IS_flush | ~normal_stall & ~ctrl_stall;
-    assign RO_en = ~IS_flush & ~normal_stall & ~ctrl_stall;
 
     always @ (posedge clk or posedge rst) begin
         if (rst) begin
@@ -264,12 +264,17 @@ module CtrlUnit(
     wire rdy2 = ~|fu2;
 
     // normal stall: structural hazard or WAW
-    assign normal_stall = FUS[use_FU][`BUSY] | 
-                          (dst == FUS[`FU_ALU][`DST_H:`DST_L]) | 
-                          (dst == FUS[`FU_MEM][`DST_H:`DST_L]) | 
-                          (dst == FUS[`FU_MUL][`DST_H:`DST_L]) | 
-                          (dst == FUS[`FU_DIV][`DST_H:`DST_L]) | 
-                          (dst == FUS[`FU_JUMP][`DST_H:`DST_L]);           //fill sth. here
+    // assign normal_stall = (FUS[`FU_ALU][`BUSY] & use_ALU) |
+    //                       (FUS[`FU_MEM][`BUSY] & use_MEM) |
+    //                       (FUS[`FU_MUL][`BUSY] & use_MUL) |
+    //                       (FUS[`FU_DIV][`BUSY] & use_DIV) |
+    //                       (FUS[`FU_JUMP][`BUSY] & use_JUMP) |
+    //                       (|RRS[dst] & dst != 0) | 
+    //                       (|RRS[dst] & dst != 0) | 
+    //                       (|RRS[dst] & dst != 0) | 
+    //                       (|RRS[dst] & dst != 0) | 
+    //                       (|RRS[dst] & dst != 0);           //fill sth. here
+    assign normal_stall = (|use_FU & FUS[use_FU][`BUSY]) | (|dst & |RRS[dst]);
 
     assign ImmSel = {3{JALR | L_valid | I_valid}} & `Imm_type_I |
                     {3{B_valid}}                  & `Imm_type_B |
