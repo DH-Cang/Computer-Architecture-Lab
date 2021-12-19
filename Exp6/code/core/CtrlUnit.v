@@ -46,16 +46,16 @@ module CtrlUnit(
     // used in for loop
     integer i;
 
-    // Function Unit Status
+    // Function Unit Status, 5 FUs in total
     reg[31:0] FUS[1:5];
     reg[31:0] IMM[1:5];
 
     // records which FU will write corresponding reg at WB
-    // Register Record Status, 3 bits for each register
+    // Register Record Status, 3 bits for each register, 32 registers in total
     reg[2:0] RRS[0:31];
 
     // sometimes an instruction needs PC to execute
-    // pc record
+    // pc record, 5 FUs in total
     reg[31:0] PCR[1:5];
 
     wire RO_en;
@@ -173,7 +173,7 @@ module CtrlUnit(
             ctrl_stall <= 0;
         end
         else begin
-            // IS
+            // IS, if this is a jump instruction, stop the pipeline
             if (RO_en & (use_FU == `FU_JUMP)) begin
                 ctrl_stall <= 1;
             end
@@ -275,58 +275,58 @@ module CtrlUnit(
     // ensure WAR:
     // If an FU hasn't read a register value (RO), don't write to it.
     wire ALU_WAR = (
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != ... | ...)  &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != ... | ...)  &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != ... | ...)       //fill sth. here
+        (FUS[`FU_MEM][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_MEM][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
+        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])       //fill sth. here
     );
 
     wire MEM_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != ... | ...) &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != ... | ...) &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != ... | ...)      //fill sth. here
+        (FUS[`FU_ALU][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_ALU][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
+        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L])      //fill sth. here
     );
 
     wire MUL_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != ... | ...) &     //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= ... | ...) &     //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= ... | ...)       //fill sth. here
+        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
+        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L])       //fill sth. here
     );
 
     wire DIV_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= ... | ...) &      //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= ... | ...)        //fill sth. here
+        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L])        //fill sth. here
     );
 
     wire JUMP_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != ... | ...) &      //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != ... | ...)        //fill sth. here
+        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
+        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L])        //fill sth. here
     );
 
     // maintain the table
@@ -349,15 +349,15 @@ module CtrlUnit(
                 // not busy, no WAW, write info to FUS and RRS
                 if (|dst) RRS[dst] <= use_FU;
                 FUS[use_FU][`BUSY] <= 1'b1;
-                FUS[use_FU][`OP_H:`OP_L] <=                          //fill sth. here.
-                FUS[use_FU][`DST_H:`DST_L] <= 
-                FUS[use_FU][`SRC1_H:`SRC1_L] <= 
-                FUS[use_FU][`SRC2_H:`SRC2_L] <= 
-                FUS[use_FU][`FU1_H:`FU1_L] <= 
-                FUS[use_FU][`FU2_H:`FU2_L] <= 
-                FUS[use_FU][`RDY1] <= 
-                FUS[use_FU][`RDY2] <= 
-                FUS[use_FU][`FU_DONE] <= 
+                FUS[use_FU][`OP_H:`OP_L] <= op;                         //fill sth. here.
+                FUS[use_FU][`DST_H:`DST_L] <= rd; 
+                FUS[use_FU][`SRC1_H:`SRC1_L] <= rs1; 
+                FUS[use_FU][`SRC2_H:`SRC2_L] <= rs2; 
+                FUS[use_FU][`FU1_H:`FU1_L] <= fu1; 
+                FUS[use_FU][`FU2_H:`FU2_L] <= fu2; 
+                FUS[use_FU][`RDY1] <= rdy1; 
+                FUS[use_FU][`RDY2] <= rdy2; 
+                FUS[use_FU][`FU_DONE] <= 0; 
 
                 IMM[use_FU] <= imm;
                 PCR[use_FU] <= PC;
@@ -369,26 +369,33 @@ module CtrlUnit(
                 FUS[`FU_JUMP][`RDY1] <= 1'b0;
                 FUS[`FU_JUMP][`RDY2] <= 1'b0;
             end
-            else if (...) begin             //fill sth. here.
+            else if (FUS[`FU_ALU][`RDY1] & FUS[`FU_ALU][`RDY2]) begin             //fill sth. here.
                 // ALU
-                ...                         //fill sth. here.
+                FUS[`FU_ALU][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_ALU][`RDY2] <= 1'b0; 
             end
-            else if (..) begin             //fill sth. here.
+            else if (FUS[`FU_MEM][`RDY1] & FUS[`FU_MEM][`RDY2]) begin             //fill sth. here.
                 // MEM
-                ...                         //fill sth. here.
+                FUS[`FU_MEM][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_MEM][`RDY2] <= 1'b0; 
             end
-            else if (...) begin             //fill sth. here.
+            else if (FUS[`FU_MUL][`RDY1] & FUS[`FU_MUL][`RDY2]) begin             //fill sth. here.
                 // MUL
-                ...                         //fill sth. here.
+                FUS[`FU_MUL][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_MUL][`RDY2] <= 1'b0; 
             end
-            else if (..) begin             //fill sth. here.
+            else if (FUS[`FU_DIV][`RDY1] & FUS[`FU_DIV][`RDY2]) begin             //fill sth. here.
                 // DIV
-                ...                         //fill sth. here.
+                FUS[`FU_DIV][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_DIV][`RDY2] <= 1'b0; 
             end
 
             // EX execute
-            FUS[`FU_ALU][`FU_DONE] <= ALU_done   //fill sth. here
-            FUS[`FU_MEM][`FU_DONE] <= ...              //fill sth. here
+            FUS[`FU_ALU][`FU_DONE] <= ALU_done;   //fill sth. here
+            FUS[`FU_MEM][`FU_DONE] <= MEM_done;   //fill sth. here
+            FUS[`FU_MUL][`FU_DONE] <= MUL_done;   //fill sth. here
+            FUS[`FU_DIV][`FU_DONE] <= DIV_done;   //fill sth. here
+            FUS[`FU_JUMP][`FU_DONE] <= JUMP_done;   //fill sth. here
 
             // WB write back
             if (FUS[`FU_JUMP][`FU_DONE] & JUMP_WAR) begin

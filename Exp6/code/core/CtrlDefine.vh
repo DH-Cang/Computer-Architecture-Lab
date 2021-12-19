@@ -1,4 +1,4 @@
-// function unit
+// function unit, 3 bits
 `define FU_BLANK    3'd0
 `define FU_ALU      3'd1
 `define FU_MEM      3'd2
