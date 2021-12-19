@@ -162,8 +162,12 @@ module CtrlUnit(
     wire use_DIV = DIV | DIVU | REM | REMU;
     wire use_JUMP = B_valid | JAL | JALR;
 
-    // normal stall: structural hazard or WAW
-    assign normal_stall = ...;           //fill sth. here
+    // which Function Unit to be used for this instruction
+    wire[2:0] use_FU = {3{use_ALU}}  & `FU_ALU  |
+                       {3{use_MEM}}  & `FU_MEM  |
+                       {3{use_MUL}}  & `FU_MUL  |
+                       {3{use_DIV}}  & `FU_DIV  |
+                       {3{use_JUMP}} & `FU_JUMP ;
 
     assign IS_en = IS_flush | ~normal_stall & ~ctrl_stall;
     assign RO_en = ~IS_flush & ~normal_stall & ~ctrl_stall;
@@ -198,13 +202,6 @@ module CtrlUnit(
 
     // stop issuing until result is known
     assign jump_stall = FUS[`FU_JUMP][`BUSY] & (~JUMP_done);
-
-    // which Function Unit to be used for this instruction
-    wire[2:0] use_FU = {3{use_ALU}}  & `FU_ALU  |
-                       {3{use_MEM}}  & `FU_MEM  |
-                       {3{use_MUL}}  & `FU_MUL  |
-                       {3{use_DIV}}  & `FU_DIV  |
-                       {3{use_JUMP}} & `FU_JUMP ;
 
     // operation indicated by this instruction
     wire[4:0] op = {5{ADD}}          & `ALU_ADD    |
@@ -266,6 +263,14 @@ module CtrlUnit(
     wire rdy1 = ~|fu1;
     wire rdy2 = ~|fu2;
 
+    // normal stall: structural hazard or WAW
+    assign normal_stall = FUS[use_FU][`BUSY] | 
+                          (dst == FUS[`FU_ALU][`DST_H:`DST_L]) | 
+                          (dst == FUS[`FU_MEM][`DST_H:`DST_L]) | 
+                          (dst == FUS[`FU_MUL][`DST_H:`DST_L]) | 
+                          (dst == FUS[`FU_DIV][`DST_H:`DST_L]) | 
+                          (dst == FUS[`FU_JUMP][`DST_H:`DST_L]);           //fill sth. here
+
     assign ImmSel = {3{JALR | L_valid | I_valid}} & `Imm_type_I |
                     {3{B_valid}}                  & `Imm_type_B |
                     {3{JAL}}                      & `Imm_type_J |
@@ -275,58 +280,58 @@ module CtrlUnit(
     // ensure WAR:
     // If an FU hasn't read a register value (RO), don't write to it.
     wire ALU_WAR = (
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])  &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_ALU][`DST_H:`DST_L])       //fill sth. here
+        ((FUS[`FU_MEM][`SRC1_H:`SRC1_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY1] )  &    //fill sth. here
+        ((FUS[`FU_MEM][`SRC2_H:`SRC2_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY2] )  & 
+        ((FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY1] )  & 
+        ((FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY2] )  & 
+        ((FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY1] )  & 
+        ((FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY2] )  & 
+        ((FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY1])  & 
+        ((FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != FUS[`FU_ALU][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY2])    
     );
 
     wire MEM_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L]) &    //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MEM][`DST_H:`DST_L])      //fill sth. here
+        ((FUS[`FU_ALU][`SRC1_H:`SRC1_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY1] ) &    //fill sth. here
+        ((FUS[`FU_ALU][`SRC2_H:`SRC2_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY2] ) & 
+        ((FUS[`FU_MUL][`SRC1_H:`SRC1_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY1] ) &  
+        ((FUS[`FU_MUL][`SRC2_H:`SRC2_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY2] ) &  
+        ((FUS[`FU_DIV][`SRC1_H:`SRC1_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY1] ) &  
+        ((FUS[`FU_DIV][`SRC2_H:`SRC2_L]  != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY2] ) &  
+        ((FUS[`FU_JUMP][`SRC1_H:`SRC1_L] != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY1]) &  
+        ((FUS[`FU_JUMP][`SRC2_H:`SRC2_L] != FUS[`FU_MEM][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY2])    
     );
 
     wire MUL_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L]) &     //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= 5'b00000 | FUS[`FU_MUL][`DST_H:`DST_L])       //fill sth. here
+        ((FUS[`FU_ALU][`SRC1_H:`SRC1_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY1] ) &     //fill sth. here
+        ((FUS[`FU_ALU][`SRC2_H:`SRC2_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY2] ) &  
+        ((FUS[`FU_MEM][`SRC1_H:`SRC1_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY1] ) &  
+        ((FUS[`FU_MEM][`SRC2_H:`SRC2_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY2] ) &  
+        ((FUS[`FU_DIV][`SRC1_H:`SRC1_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY1] ) &  
+        ((FUS[`FU_DIV][`SRC2_H:`SRC2_L] != FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY2] ) &  
+        ((FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY1]) &  
+        ((FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= FUS[`FU_MUL][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY2])    
     );
 
     wire DIV_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= 5'b00000 | FUS[`FU_DIV][`DST_H:`DST_L])        //fill sth. here
+        ((FUS[`FU_ALU][`SRC1_H:`SRC1_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY1] ) &      //fill sth. here
+        ((FUS[`FU_ALU][`SRC2_H:`SRC2_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY2] ) &  
+        ((FUS[`FU_MEM][`SRC1_H:`SRC1_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY1] ) &  
+        ((FUS[`FU_MEM][`SRC2_H:`SRC2_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY2] ) &  
+        ((FUS[`FU_MUL][`SRC1_H:`SRC1_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY1] ) &  
+        ((FUS[`FU_MUL][`SRC2_H:`SRC2_L] != FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY2] ) &  
+        ((FUS[`FU_JUMP][`SRC1_H:`SRC1_L]!= FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY1]) &  
+        ((FUS[`FU_JUMP][`SRC2_H:`SRC2_L]!= FUS[`FU_DIV][`DST_H:`DST_L]) | FUS[`FU_JUMP][`RDY2])    
     );
 
     wire JUMP_WAR = (
-        (FUS[`FU_ALU][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_ALU][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MEM][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_MUL][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_DIV][`SRC1_H:`SRC1_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L]) &      //fill sth. here
-        (FUS[`FU_DIV][`SRC2_H:`SRC2_L] != 5'b00000 | FUS[`FU_JUMP][`DST_H:`DST_L])        //fill sth. here
+        ((FUS[`FU_ALU][`SRC1_H:`SRC1_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY1] ) &      //fill sth. here
+        ((FUS[`FU_ALU][`SRC2_H:`SRC2_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_ALU][`RDY2] ) &  
+        ((FUS[`FU_MEM][`SRC1_H:`SRC1_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY1] ) &  
+        ((FUS[`FU_MEM][`SRC2_H:`SRC2_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_MEM][`RDY2] ) &  
+        ((FUS[`FU_MUL][`SRC1_H:`SRC1_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY1] ) &  
+        ((FUS[`FU_MUL][`SRC2_H:`SRC2_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_MUL][`RDY2] ) &  
+        ((FUS[`FU_DIV][`SRC1_H:`SRC1_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY1]) &  
+        ((FUS[`FU_DIV][`SRC2_H:`SRC2_L] != FUS[`FU_JUMP][`DST_H:`DST_L]) | FUS[`FU_DIV][`RDY2])    
     );
 
     // maintain the table
@@ -371,56 +376,118 @@ module CtrlUnit(
             end
             else if (FUS[`FU_ALU][`RDY1] & FUS[`FU_ALU][`RDY2]) begin             //fill sth. here.
                 // ALU
-                FUS[`FU_ALU][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_ALU][`RDY1] <= 1'b0; 
                 FUS[`FU_ALU][`RDY2] <= 1'b0; 
             end
             else if (FUS[`FU_MEM][`RDY1] & FUS[`FU_MEM][`RDY2]) begin             //fill sth. here.
                 // MEM
-                FUS[`FU_MEM][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_MEM][`RDY1] <= 1'b0;  
                 FUS[`FU_MEM][`RDY2] <= 1'b0; 
             end
             else if (FUS[`FU_MUL][`RDY1] & FUS[`FU_MUL][`RDY2]) begin             //fill sth. here.
                 // MUL
-                FUS[`FU_MUL][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_MUL][`RDY1] <= 1'b0; 
                 FUS[`FU_MUL][`RDY2] <= 1'b0; 
             end
             else if (FUS[`FU_DIV][`RDY1] & FUS[`FU_DIV][`RDY2]) begin             //fill sth. here.
                 // DIV
-                FUS[`FU_DIV][`RDY1] <= 1'b0;                          //fill sth. here.
+                FUS[`FU_DIV][`RDY1] <= 1'b0; 
                 FUS[`FU_DIV][`RDY2] <= 1'b0; 
             end
 
             // EX execute
             FUS[`FU_ALU][`FU_DONE] <= ALU_done;   //fill sth. here
-            FUS[`FU_MEM][`FU_DONE] <= MEM_done;   //fill sth. here
-            FUS[`FU_MUL][`FU_DONE] <= MUL_done;   //fill sth. here
-            FUS[`FU_DIV][`FU_DONE] <= DIV_done;   //fill sth. here
-            FUS[`FU_JUMP][`FU_DONE] <= JUMP_done;   //fill sth. here
+            FUS[`FU_MEM][`FU_DONE] <= MEM_done;   
+            FUS[`FU_MUL][`FU_DONE] <= MUL_done;   
+            FUS[`FU_DIV][`FU_DONE] <= DIV_done;   
+            FUS[`FU_JUMP][`FU_DONE] <= JUMP_done; 
+            FUS[`FU_ALU][`BUSY] <= ~ALU_done;  
+            FUS[`FU_MEM][`BUSY] <= ~MEM_done;  
+            FUS[`FU_MUL][`BUSY] <= ~MUL_done;  
+            FUS[`FU_DIV][`BUSY] <= ~DIV_done;  
+            FUS[`FU_JUMP][`BUSY] <= ~JUMP_done;
 
             // WB write back
             if (FUS[`FU_JUMP][`FU_DONE] & JUMP_WAR) begin
+                // clear everything
                 FUS[`FU_JUMP] <= 32'b0;
                 RRS[FUS[`FU_JUMP][`DST_H:`DST_L]] <= 3'b0;
 
                 // ensure RAW
-                if (FUS[`FU_ALU][`FU1_H:`FU1_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_MEM][`FU1_H:`FU1_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_MUL][`FU1_H:`FU1_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_DIV][`FU1_H:`FU1_L] == `FU_JUMP) ...;           //fill sth. here
+                if (FUS[`FU_ALU][`FU1_H:`FU1_L] == `FU_JUMP) FUS[`FU_ALU][`RDY1] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_MEM][`FU1_H:`FU1_L] == `FU_JUMP) FUS[`FU_MEM][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MUL][`FU1_H:`FU1_L] == `FU_JUMP) FUS[`FU_MUL][`RDY1] <= 1'b1;           
+                if (FUS[`FU_DIV][`FU1_H:`FU1_L] == `FU_JUMP) FUS[`FU_DIV][`RDY1] <= 1'b1;           
 
-                if (FUS[`FU_ALU][`FU2_H:`FU2_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_MEM][`FU2_H:`FU2_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_MUL][`FU2_H:`FU2_L] == `FU_JUMP) ...;           //fill sth. here
-                if (FUS[`FU_DIV][`FU2_H:`FU2_L] == `FU_JUMP)...;           //fill sth. here
+                if (FUS[`FU_ALU][`FU2_H:`FU2_L] == `FU_JUMP) FUS[`FU_ALU][`RDY2] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_MEM][`FU2_H:`FU2_L] == `FU_JUMP) FUS[`FU_MEM][`RDY2] <= 1'b1;         
+                if (FUS[`FU_MUL][`FU2_H:`FU2_L] == `FU_JUMP) FUS[`FU_MUL][`RDY2] <= 1'b1;        
+                if (FUS[`FU_DIV][`FU2_H:`FU2_L] == `FU_JUMP) FUS[`FU_DIV][`RDY2] <= 1'b1;           
             end
             // ALU
-                ...;           //fill sth. here
+            if (FUS[`FU_ALU][`FU_DONE] & ALU_WAR) begin
+                FUS[`FU_ALU] <= 32'b0;
+                RRS[FUS[`FU_ALU][`DST_H:`DST_L]] <= 3'b0;
+
+                // ensure RAW
+                if (FUS[`FU_JUMP][`FU1_H:`FU1_L] == `FU_ALU) FUS[`FU_JUMP][`RDY1] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_MEM][`FU1_H:`FU1_L] == `FU_ALU) FUS[`FU_MEM][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MUL][`FU1_H:`FU1_L] == `FU_ALU) FUS[`FU_MUL][`RDY1] <= 1'b1;           
+                if (FUS[`FU_DIV][`FU1_H:`FU1_L] == `FU_ALU) FUS[`FU_DIV][`RDY1] <= 1'b1;           
+
+                if (FUS[`FU_JUMP][`FU2_H:`FU2_L] == `FU_ALU) FUS[`FU_JUMP][`RDY2] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_MEM][`FU2_H:`FU2_L] == `FU_ALU) FUS[`FU_MEM][`RDY2] <= 1'b1;         
+                if (FUS[`FU_MUL][`FU2_H:`FU2_L] == `FU_ALU) FUS[`FU_MUL][`RDY2] <= 1'b1;        
+                if (FUS[`FU_DIV][`FU2_H:`FU2_L] == `FU_ALU) FUS[`FU_DIV][`RDY2] <= 1'b1;           
+            end
             // MEM
-                ...;           //fill sth. here
+            if (FUS[`FU_MEM][`FU_DONE] & MEM_WAR) begin
+                FUS[`FU_MEM] <= 32'b0;
+                RRS[FUS[`FU_MEM][`DST_H:`DST_L]] <= 3'b0;
+
+                // ensure RAW
+                if (FUS[`FU_JUMP][`FU1_H:`FU1_L] == `FU_MEM) FUS[`FU_JUMP][`RDY1] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU1_H:`FU1_L] == `FU_MEM) FUS[`FU_ALU][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MUL][`FU1_H:`FU1_L] == `FU_MEM) FUS[`FU_MUL][`RDY1] <= 1'b1;           
+                if (FUS[`FU_DIV][`FU1_H:`FU1_L] == `FU_MEM) FUS[`FU_DIV][`RDY1] <= 1'b1;           
+
+                if (FUS[`FU_JUMP][`FU2_H:`FU2_L] == `FU_MEM) FUS[`FU_JUMP][`RDY2] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU2_H:`FU2_L] == `FU_MEM) FUS[`FU_ALU][`RDY2] <= 1'b1;         
+                if (FUS[`FU_MUL][`FU2_H:`FU2_L] == `FU_MEM) FUS[`FU_MUL][`RDY2] <= 1'b1;        
+                if (FUS[`FU_DIV][`FU2_H:`FU2_L] == `FU_MEM) FUS[`FU_DIV][`RDY2] <= 1'b1;           
+            end
             // MUL
-                ...;           //fill sth. here
+            if (FUS[`FU_MUL][`FU_DONE] & MUL_WAR) begin
+                FUS[`FU_MUL] <= 32'b0;
+                RRS[FUS[`FU_MUL][`DST_H:`DST_L]] <= 3'b0;
+
+                // ensure RAW
+                if (FUS[`FU_JUMP][`FU1_H:`FU1_L] == `FU_MUL) FUS[`FU_JUMP][`RDY1] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU1_H:`FU1_L] == `FU_MUL) FUS[`FU_ALU][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MEM][`FU1_H:`FU1_L] == `FU_MUL) FUS[`FU_MEM][`RDY1] <= 1'b1;           
+                if (FUS[`FU_DIV][`FU1_H:`FU1_L] == `FU_MUL) FUS[`FU_DIV][`RDY1] <= 1'b1;           
+
+                if (FUS[`FU_JUMP][`FU2_H:`FU2_L] == `FU_MUL) FUS[`FU_JUMP][`RDY2] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU2_H:`FU2_L] == `FU_MUL) FUS[`FU_ALU][`RDY2] <= 1'b1;         
+                if (FUS[`FU_MEM][`FU2_H:`FU2_L] == `FU_MUL) FUS[`FU_MEM][`RDY2] <= 1'b1;        
+                if (FUS[`FU_DIV][`FU2_H:`FU2_L] == `FU_MUL) FUS[`FU_DIV][`RDY2] <= 1'b1;           
+            end
             // DIV
-                ...;           //fill sth. here
+            if (FUS[`FU_DIV][`FU_DONE] & DIV_WAR) begin
+                FUS[`FU_DIV] <= 32'b0;
+                RRS[FUS[`FU_DIV][`DST_H:`DST_L]] <= 3'b0;
+
+                // ensure RAW
+                if (FUS[`FU_JUMP][`FU1_H:`FU1_L] == `FU_DIV) FUS[`FU_JUMP][`RDY1] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU1_H:`FU1_L] == `FU_DIV) FUS[`FU_ALU][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MEM][`FU1_H:`FU1_L] == `FU_DIV) FUS[`FU_MEM][`RDY1] <= 1'b1;           
+                if (FUS[`FU_MUL][`FU1_H:`FU1_L] == `FU_DIV) FUS[`FU_MUL][`RDY1] <= 1'b1;           
+
+                if (FUS[`FU_JUMP][`FU2_H:`FU2_L] == `FU_DIV) FUS[`FU_JUMP][`RDY2] <= 1'b1;           //fill sth. here
+                if (FUS[`FU_ALU][`FU2_H:`FU2_L] == `FU_DIV) FUS[`FU_ALU][`RDY2] <= 1'b1;         
+                if (FUS[`FU_MEM][`FU2_H:`FU2_L] == `FU_DIV) FUS[`FU_MEM][`RDY2] <= 1'b1;        
+                if (FUS[`FU_MUL][`FU2_H:`FU2_L] == `FU_DIV) FUS[`FU_MUL][`RDY2] <= 1'b1;           
+            end
         end
     end
 
