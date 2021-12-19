@@ -1,4 +1,4 @@
-// function unit, 3 bits
+// function unit
 `define FU_BLANK    3'd0
 `define FU_ALU      3'd1
 `define FU_MEM      3'd2
@@ -17,13 +17,10 @@
 `define BUSY    0
 `define OP_L    1
 `define OP_H    5
-// lowest bit and highest bit of destination
 `define DST_L   6
 `define DST_H   10
-// lowest bit and highest bit of source 1
 `define SRC1_L  11
 `define SRC1_H  15
-// lowest bit and highest bit of source 2
 `define SRC2_L  16
 `define SRC2_H  20
 `define FU1_L   21

@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/Exp6.srcs/sources_1/ip/divider/sim/divider.vhd" \
+"d:/Users/lenovo/Desktop/debugzju/nightmare/architecture/lab/Computer-Architecture-Lab/Exp6/Exp6.srcs/sources_1/ip/multiplier/sim/multiplier.vhd" \
+
+# Do not sort compile order
+nosort
